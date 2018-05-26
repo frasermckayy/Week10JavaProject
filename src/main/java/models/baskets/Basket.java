@@ -4,6 +4,7 @@ import models.items.Item;
 import models.users.User;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,6 +14,11 @@ public class Basket {
     private int id;
     private Set<Item> items;
     private User user;
+
+    public Basket(User user) {
+        this.items = new HashSet<>();
+        this.user = user;
+    }
 
     public Basket() {
     }
@@ -44,6 +50,22 @@ public class Basket {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public void addItem(Item new_item){
+        this.items.add(new_item);
+    }
+
+    public void removeitem(Item removedItem){
+        this.items.remove(removedItem);
+    }
+
+    public void clearBasket(){
+        this.items.clear();
+    }
+
+    public int numberOfItemsInBasket(){
+        return this.items.size();
     }
 
 }

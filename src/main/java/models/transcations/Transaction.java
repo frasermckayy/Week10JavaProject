@@ -1,7 +1,6 @@
-package models.transaction;
+package models.transcations;
 
-
-import models.user.User;
+import models.users.User;
 
 import javax.persistence.*;
 
@@ -36,4 +35,5 @@ public class Transaction {
     public void setUser(User user) {
         this.user = user;
     }
+
 }
