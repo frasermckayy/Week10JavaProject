@@ -32,8 +32,10 @@ public class UserTest {
     @Test
     public void canSignUpToLoyaltyScheme(){
         user.signUpToLoyaltyScheme( "26/05/2018");
-        assertEquals("26/05/2018", user.getLoyaltyCard().getSignUpDate());
+        assertEquals(true, user.isSignedUpForLoyaltyScheme());
     }
+
+
 
     @Test
     public void canAssignBasket(){
