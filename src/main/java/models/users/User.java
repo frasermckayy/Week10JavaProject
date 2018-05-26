@@ -4,6 +4,7 @@ import models.baskets.Basket;
 import models.transactions.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -13,13 +14,16 @@ public class User {
     private int id;
     private Set<Transaction> transaction;
     private models.users.LoyaltyCard loyaltyCard;
+    private boolean signedUpForLoyaltyScheme;
     private Basket basket;
     private String name;
     private String username;
     private String password;
 
-    public User(LoyaltyCard loyaltyCard, Basket basket, String name, String username, String password) {
+    public User(LoyaltyCard loyaltyCard, boolean signedUpForLoyaltyScheme, Basket basket, String name, String username, String password) {
+        this.transaction = new HashSet<>();
         this.loyaltyCard = loyaltyCard;
+        this.signedUpForLoyaltyScheme = false;
         this.basket = basket;
         this.name = name;
         this.username = username;
@@ -65,6 +69,15 @@ public class User {
 
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @Column(name = "loyalty_scheme")
+    public boolean isSignedUpForLoyaltyScheme() {
+        return signedUpForLoyaltyScheme;
+    }
+
+    public void setSignedUpForLoyaltyScheme(boolean signedUpForLoyaltyScheme) {
+        this.signedUpForLoyaltyScheme = signedUpForLoyaltyScheme;
     }
 
     @Column(name = "name")
