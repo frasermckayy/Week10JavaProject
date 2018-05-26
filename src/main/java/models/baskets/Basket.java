@@ -68,4 +68,12 @@ public class Basket {
         return this.items.size();
     }
 
+    public double calculateTotal(){
+        double sum = 0;
+        for (Item item : items){
+            sum += (item.getPrice() * item.getQuantity());
+        }
+        return sum;
+    }
+
 }

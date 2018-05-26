@@ -47,4 +47,11 @@ public class BasketTest {
         testBasket.clearBasket();
         assertEquals(0, testBasket.numberOfItemsInBasket());
     }
+
+    @Test
+    public void canCalculateTotal(){
+        testBasket.addItem(food1);
+        testBasket.addItem(food2);
+        assertEquals(9.0, testBasket.calculateTotal(), 0.01);
+    }
 }
