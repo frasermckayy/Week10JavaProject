@@ -10,8 +10,7 @@ public class LoyaltyCard {
     private models.users.User user;
     private String signUpDate;
 
-    public LoyaltyCard(User user, String signUpDate) {
-        this.user = user;
+    public LoyaltyCard(String signUpDate) {
         this.signUpDate = signUpDate;
     }
 
@@ -45,5 +44,9 @@ public class LoyaltyCard {
 
     public void setSignUpDate(String signUpDate) {
         this.signUpDate = signUpDate;
+    }
+
+    public void assignUser(User user){
+        this.setUser(user);
     }
 }
