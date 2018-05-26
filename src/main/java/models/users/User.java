@@ -1,4 +1,4 @@
-package models.user;
+package models.users;
 
 import models.baskets.Basket;
 import models.transaction.Transaction;
@@ -12,7 +12,7 @@ public class User {
 
     private int id;
     private Set<Transaction> transaction;
-    private models.user.LoyaltyCard loyaltyCard;
+    private models.users.LoyaltyCard loyaltyCard;
     private Basket basket;
 
     public User() {
@@ -39,11 +39,11 @@ public class User {
     }
 
     @OneToOne(mappedBy = "user")
-    public models.user.LoyaltyCard getLoyaltyCard() {
+    public models.users.LoyaltyCard getLoyaltyCard() {
         return loyaltyCard;
     }
 
-    public void setLoyaltyCard(models.user.LoyaltyCard loyaltyCard) {
+    public void setLoyaltyCard(models.users.LoyaltyCard loyaltyCard) {
         this.loyaltyCard = loyaltyCard;
     }
 
