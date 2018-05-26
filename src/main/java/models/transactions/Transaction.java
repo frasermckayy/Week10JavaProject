@@ -1,5 +1,6 @@
 package models.transactions;
 
+import models.baskets.Basket;
 import models.items.Item;
 import models.users.User;
 
@@ -87,4 +88,7 @@ public class Transaction {
         this.items.remove(removedItem);
     }
 
+    public void updateAmount(Basket testBasket) {
+        setAmount(testBasket.calculateTotal());
+    }
 }
