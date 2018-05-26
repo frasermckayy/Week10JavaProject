@@ -22,9 +22,9 @@ public class TransactionTest {
 
     @Before
     public void before(){
-        loyaltyCard = new LoyaltyCard(user, "na/na/na");
-        user = new User(loyaltyCard, false, basket, "Andrew", "Fraz23", "pass123");
-        transaction = new Transaction(user, 0, "26/05/2018");
+        loyaltyCard = new LoyaltyCard("na/na/na");
+        user = new User(loyaltyCard, false, "Andrew", "Fraz23", "pass123");
+        transaction = new Transaction(user, 50, "26/05/2018");
     }
 
     @Test
