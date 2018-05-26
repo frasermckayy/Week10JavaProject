@@ -46,4 +46,20 @@ public class Basket {
         this.user = user;
     }
 
+    public void addItem(Item new_item){
+        this.items.add(new_item);
+    }
+
+    public void removeitem(Item removedItem){
+        this.items.remove(removedItem);
+    }
+
+    public void clearBasket(){
+        this.items.clear();
+    }
+
+    public int numberOfItemsInBasket(){
+        return this.items.size();
+    }
+
 }
