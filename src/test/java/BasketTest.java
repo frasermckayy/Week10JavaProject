@@ -1,4 +1,5 @@
 import models.baskets.Basket;
+import models.items.Category;
 import models.items.Food;
 import models.users.User;
 import org.junit.Before;
@@ -16,8 +17,8 @@ public class BasketTest {
     @Before
     public void before() {
         testBasket = new Basket(user);
-        food1 = new Food("Bread");
-        food2 = new Food("Apple");
+        food1 = new Food(Category.FOOD, 3, 1.50, "Bananas");
+        food2 = new Food(Category.FOOD, 3, 1.50, "Apples");
     }
 
     @Test
