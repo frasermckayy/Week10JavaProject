@@ -15,8 +15,8 @@ public class UserTest {
 
     @Before
     public void before(){
-        loyaltyCard = new LoyaltyCard(user, "na/na/na");
-        user = new User(loyaltyCard, false, basket, "Andrew", "Fraz23", "pass123");
+        loyaltyCard = new LoyaltyCard("na/na/na");
+        user = new User(loyaltyCard, false, "Andrew", "Fraz23", "pass123");
     }
 
     @Test
@@ -30,7 +30,14 @@ public class UserTest {
     }
 
     @Test
-    public void canGetBasket(){
+    public void canSignUpToLoyaltyScheme(){
+        user.signUpToLoyaltyScheme( "26/05/2018");
+        assertEquals("26/05/2018", user.getLoyaltyCard().getSignUpDate());
+    }
+
+    @Test
+    public void canAssignBasket(){
+        user.assignBasket(basket);
         assertEquals(basket, user.getBasket());
     }
 
@@ -48,4 +55,6 @@ public class UserTest {
     public void canGetPassWord(){
         assertEquals("pass123", user.getPassword());
     }
+
+
 }

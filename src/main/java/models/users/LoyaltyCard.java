@@ -49,4 +49,8 @@ public class LoyaltyCard {
     public void assignUser(User user){
         this.setUser(user);
     }
+
+    public void signUp(String date){
+        setSignUpDate(date);
+    }
 }

@@ -16,7 +16,7 @@ public class LoyaltyCardTest {
     @Before
     public void before(){
         loyaltyCard = new LoyaltyCard("26/05/2018");
-        user = new User(loyaltyCard, false, basket, "Andrew", "Fraz23", "pass123");
+        user = new User(loyaltyCard, false, "Andrew", "Fraz23", "pass123");
     }
 
 
