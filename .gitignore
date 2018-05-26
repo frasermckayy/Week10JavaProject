@@ -33,8 +33,10 @@
 .idea/**/dynamic.xml
 .idea/**/uiDesigner.xml
 .idea
+.idea.log
 
 # IntelliJ
 out/
 target/
 .idea_modules/
+wk10_duo_project.iml
