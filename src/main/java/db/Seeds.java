@@ -1,23 +1,25 @@
 package db;
 
+import models.baskets.Basket;
+import models.items.Category;
 import models.items.Food;
+import models.items.Item;
+import models.transactions.Transaction;
+import models.users.User;
 
 public class Seeds {
 
     public static void main(String[] args) {
 
-        Food food = new Food("cheese");
-////        Basket basket = new Basket();
-////        User user = new User();
-////        Transaction transaction = new Transaction();
-////        LoyaltyCard loyaltyCard = new LoyaltyCard();
-//
-//        DBHelper.save();
+        User user = new User();
+        Transaction transaction = new Transaction(user);
+        Basket basket = new Basket();
+        Food food = new Food(Category.FOOD, 3, 1.50, "Apples");
+
+        basket.addItem(food);
+        DBHelper.save(basket);
+
         DBHelper.save(food);
-////        DBHelper.save(basket);
-////        DBHelper.save(user);
-////        DBHelper.save(transaction);
-////        DBHelper.save(loyaltyCard);
 
     }
 
