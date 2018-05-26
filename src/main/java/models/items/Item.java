@@ -11,6 +11,15 @@ public abstract class Item {
 
     private int id;
     private Basket basket;
+    private Category category;
+    private int quantity;
+    private double price;
+
+    public Item(Category category, int quantity, double price) {
+        this.category = category;
+        this.quantity = quantity;
+        this.price = price;
+    }
 
     public Item() {
     }
@@ -27,13 +36,40 @@ public abstract class Item {
     }
 
     @ManyToOne
-    @JoinColumn(name = "basket_id", nullable = false)
+    @JoinColumn(name = "basket_id")
     public Basket getBasket() {
         return basket;
     }
 
     public void setBasket(Basket basket) {
         this.basket = basket;
+    }
+
+    @Enumerated
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    @Column(name = "quantity")
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    @Column(name = "price")
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
 

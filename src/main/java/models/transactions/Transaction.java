@@ -1,4 +1,4 @@
-package models.transcations;
+package models.transactions;
 
 import models.users.User;
 
@@ -11,8 +11,11 @@ public class Transaction {
     private int id;
     private User user;
 
-
     public Transaction() {
+    }
+
+    public Transaction(User user) {
+        this.user = user;
     }
 
     @Id

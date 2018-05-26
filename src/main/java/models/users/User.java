@@ -1,7 +1,7 @@
 package models.users;
 
 import models.baskets.Basket;
-import models.transcations.*;
+import models.transactions.*;
 
 import javax.persistence.*;
 import java.util.Set;

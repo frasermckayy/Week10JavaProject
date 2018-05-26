@@ -15,12 +15,14 @@
         <property name="show_sql">true</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
 
-        <mapping class="models.basket.Basket"/>
+        <mapping class="models.baskets.Basket"/>
         <mapping class="models.items.Item"/>
         <mapping class="models.items.Food"/>
-        <mapping class="models.transaction.Transaction"/>
-        <mapping class="models.user.LoyaltyCard"/>
-        <mapping class="models.user.User"/>
+        <mapping class="models.items.Clothe"/>
+        <mapping class="models.items.Electronic"/>
+        <mapping class="models.transactions.Transaction"/>
+        <mapping class="models.users.LoyaltyCard"/>
+        <mapping class="models.users.User"/>
 
     </session-factory>
 </hibernate-configuration>
