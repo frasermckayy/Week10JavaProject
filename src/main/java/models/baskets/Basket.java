@@ -70,8 +70,22 @@ public class Basket {
 
     public double calculateTotal(){
         double sum = 0;
-        for (Item item : items){
+        for (Item item : this.items){
             sum += (item.getPrice() * item.getQuantity());
+        }
+        return sum;
+    }
+
+    public double buyOneGetOneFree(){
+        double sum = 0;
+        for (Item item : this.items){
+            if (item.getQuantity() > 5) {
+                if (item.getQuantity() % 2 == 0) {
+                    sum += item.getPrice() * (item.getQuantity() / 2);
+                } else {
+                    sum += item.getPrice() * ((item.getQuantity() / 2) + 1);
+                }
+            }
         }
         return sum;
     }

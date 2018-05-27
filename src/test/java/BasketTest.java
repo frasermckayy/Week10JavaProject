@@ -54,4 +54,11 @@ public class BasketTest {
         testBasket.addItem(food2);
         assertEquals(9.0, testBasket.calculateTotal(), 0.01);
     }
+
+    @Test
+    public void canBuyOneGetOneFree(){
+        testBasket.addItem(food1);
+        testBasket.addItem(food2);
+        assertEquals(6.0, testBasket.buyOneGetOneFree(), 0.01);
+    }
 }
