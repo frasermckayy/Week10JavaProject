@@ -28,6 +28,7 @@ public class ShopController {
 
             // Data still to be added.
 
+            res.redirect("/shop");
             return null;
         });
 
@@ -51,6 +52,7 @@ public class ShopController {
 
             // Data still to be added.
 
+            res.redirect("/shop/search");
             return null;
         });
 
