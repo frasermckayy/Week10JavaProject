@@ -18,6 +18,7 @@ public class Electronic extends Item {
     public Electronic() {
     }
 
+    @Column(name = "parts")
     public String getParts() {
         return parts;
     }
