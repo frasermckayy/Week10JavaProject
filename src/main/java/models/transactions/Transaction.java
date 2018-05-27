@@ -22,7 +22,6 @@ public class Transaction {
         this.customer = customer;
         this.amount = amount;
         this.date = date;
-        this.items = items;
         this.items = new HashSet<>();
     }
 
