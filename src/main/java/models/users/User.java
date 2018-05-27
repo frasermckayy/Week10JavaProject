@@ -43,7 +43,7 @@ public class User {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public Set<Transaction> getTransaction() {
         return transaction;
     }

@@ -24,12 +24,12 @@ public class TransactionTest {
     public void before(){
         loyaltyCard = new LoyaltyCard("na/na/na");
         user = new User(loyaltyCard, false, "Andrew", "Fraz23", "pass123");
-        transaction = new Transaction(user, 50, "26/05/2018");
+        transaction = new Transaction(user, 0, "26/05/2018");
     }
 
     @Test
     public void canGetUser(){
-        assertEquals("Andrew", transaction.getUser().getName());
+        assertEquals("Andrew", transaction.getCustomer().getName());
     }
 
     @Test

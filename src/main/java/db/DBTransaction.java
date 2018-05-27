@@ -3,12 +3,16 @@ package db;
 import models.items.Item;
 import models.transactions.Transaction;
 
+import java.util.Set;
+
 public class DBTransaction {
 
-    public static void addItemToTransaction(Item item, Transaction transaction){
-        item.addTransaction(transaction);
-        transaction.addItem(item);
-        DBHelper.save(item);
+    public static void addItemToTransaction(Set<Item> items, Transaction transaction){
+        for(Item item : items){
+            item.addTransaction(transaction);
+        }
+        transaction.addItem(items);
+        DBHelper.save(items);
     }
 
 }
