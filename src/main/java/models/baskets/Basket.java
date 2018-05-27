@@ -98,4 +98,12 @@ public class Basket {
         return sum;
     }
 
+    public double loyaltyDiscount(User customer){
+        double sum = 0;
+        if (customer.isSignedUpForLoyaltyScheme()){
+            sum = calculateTotal() * 0.9;
+        }
+        return sum;
+    }
+
 }
