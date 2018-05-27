@@ -1,20 +1,24 @@
 package models.items;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "food")
+@Table(name = "foods")
 public class Food extends Item {
+
     private String name;
+
+    public Food(Category category, int quantity, double price, String name) {
+        super(category, quantity, price);
+        this.name = name;
+    }
 
     public Food() {
     }
 
-    public Food(String name) {
-        this.name = name;
-    }
-
+    @Column(name = "name")
     public String getName() {
         return name;
     }

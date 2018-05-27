@@ -7,8 +7,13 @@ import javax.persistence.*;
 public class LoyaltyCard {
 
     private int id;
-    private models.user.User user;
+    private models.users.User user;
+    private String signUpDate;
 
+    public LoyaltyCard(User user, String signUpDate) {
+        this.user = user;
+        this.signUpDate = signUpDate;
+    }
 
     public LoyaltyCard() {
     }
@@ -25,11 +30,20 @@ public class LoyaltyCard {
     }
 
     @OneToOne()
-    public models.user.User getUser() {
+    public models.users.User getUser() {
         return user;
     }
 
-    public void setUser(models.user.User user) {
+    public void setUser(models.users.User user) {
         this.user = user;
+    }
+
+    @Column(name = "signup_date")
+    public String getSignUpDate() {
+        return signUpDate;
+    }
+
+    public void setSignUpDate(String signUpDate) {
+        this.signUpDate = signUpDate;
     }
 }
