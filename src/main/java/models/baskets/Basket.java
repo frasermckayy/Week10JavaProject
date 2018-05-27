@@ -90,4 +90,12 @@ public class Basket {
         return sum;
     }
 
+    public double tenPercentOffPurchasesOver100(){
+        double sum = 0;
+        if (calculateTotal() > 100) {
+            sum = calculateTotal() * 0.9;
+        }
+        return sum;
+    }
+
 }

@@ -1,5 +1,6 @@
 import models.baskets.Basket;
 import models.items.Category;
+import models.items.Electronic;
 import models.items.Food;
 import models.users.User;
 import org.junit.Before;
@@ -60,5 +61,12 @@ public class BasketTest {
         testBasket.addItem(food1);
         testBasket.addItem(food2);
         assertEquals(6.0, testBasket.buyOneGetOneFree(), 0.01);
+    }
+
+    @Test
+    public void canGetTenPercentOff(){
+        Electronic laptop = new Electronic(Category.ELECTRONIC, 150, 1, "XF100");
+        testBasket.addItem(laptop);
+        assertEquals(135, testBasket.tenPercentOffPurchasesOver100(), 0.01);
     }
 }
