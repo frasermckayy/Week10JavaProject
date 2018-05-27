@@ -1,5 +1,6 @@
 package models.items;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -9,11 +10,12 @@ public class Electronic extends Item {
 
     private String parts;
 
-    public Electronic() {
+    public Electronic(Category category, int quantity, double price, String parts) {
+        super(category, quantity, price);
+        this.parts = parts;
     }
 
-    public Electronic(String parts) {
-        this.parts = parts;
+    public Electronic() {
     }
 
     public String getParts() {
