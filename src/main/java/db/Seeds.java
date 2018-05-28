@@ -2,6 +2,7 @@ package db;
 
 import models.baskets.Basket;
 import models.items.Category;
+import models.items.Electronic;
 import models.items.Food;
 import models.items.Item;
 import models.transactions.Transaction;
@@ -11,7 +12,7 @@ import models.users.User;
 public class Seeds {
 
     public static void main(String[] args) {
-
+      
         LoyaltyCard loyaltyCard = new LoyaltyCard();
         User user = new User(loyaltyCard, false,"Andrew", "Fraz123", "pass123");
 
@@ -23,7 +24,6 @@ public class Seeds {
 
         Transaction transaction = new Transaction(user, 0, "26/05/2018");
         transaction.getAmount(basket);
-
 
     }
 
