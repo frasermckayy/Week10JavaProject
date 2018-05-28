@@ -1,5 +1,6 @@
 package controllers;
 
+import db.DBBasket;
 import db.DBHelper;
 import db.DBUser;
 import models.baskets.Basket;
@@ -59,6 +60,19 @@ public class ShopController {
 
         post("/shop/food/:id/add", (req, res) -> {
             User currentUser = DBUser.getUser(req, res);
+            Basket usersBasket = currentUser.getBasket();
+
+            int id = Integer.parseInt(req.params(":id"));
+            Food food = DBHelper.find(id, Food.class);
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            food.setQuantity(food.getId()-quantity);
+
+            usersBasket.addItem(food);
+            usersBasket.calculateTotal();
+            DBHelper.save(usersBasket);
+
+            Basket usersBasket2 = currentUser.getBasket();
+
             res.redirect("/shop/food");
             return null;
         }, new VelocityTemplateEngine());
@@ -87,7 +101,20 @@ public class ShopController {
 
         post("/shop/clothes/:id/add", (req, res) -> {
             User currentUser = DBUser.getUser(req, res);
-            res.redirect("/shop/clothes");
+            Basket usersBasket = currentUser.getBasket();
+
+            int id = Integer.parseInt(req.params(":id"));
+            Clothe clothe = DBHelper.find(id, Clothe.class);
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            clothe.setQuantity(clothe.getId()-quantity);
+
+            usersBasket.addItem(clothe);
+            usersBasket.calculateTotal();
+            DBHelper.save(usersBasket);
+
+            Basket usersBasket2 = currentUser.getBasket();
+
+            res.redirect("/shop/food");
             return null;
         }, new VelocityTemplateEngine());
 
@@ -114,7 +141,20 @@ public class ShopController {
 
         post("/shop/electronic/:id/add", (req, res) -> {
             User currentUser = DBUser.getUser(req, res);
-            res.redirect("/shop/electronic");
+            Basket usersBasket = currentUser.getBasket();
+
+            int id = Integer.parseInt(req.params(":id"));
+            Electronic electronic = DBHelper.find(id, Electronic.class);
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            electronic.setQuantity(electronic.getId()-quantity);
+
+            usersBasket.addItem(electronic);
+            usersBasket.calculateTotal();
+            DBHelper.save(usersBasket);
+
+            Basket usersBasket2 = currentUser.getBasket();
+
+            res.redirect("/shop/food");
             return null;
         }, new VelocityTemplateEngine());
 

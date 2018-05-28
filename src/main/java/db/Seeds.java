@@ -24,6 +24,12 @@ public class Seeds {
 
         DBHelper.save(testLoyaltyCard);DBHelper.save(testUser);
 
+        // Basket
+
+        Basket newBasket = new Basket(testUser);
+
+        DBHelper.save(newBasket);
+
         // Food Items
 
         Food food1 = new Food(Category.FOOD, 10, 0.99, "Apples");

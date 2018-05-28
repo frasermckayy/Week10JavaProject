@@ -14,10 +14,12 @@ public class Basket {
     private int id;
     private Set<Item> items;
     private User user;
+    private double total;
 
     public Basket(User user) {
         this.items = new HashSet<>();
         this.user = user;
+        this.total = 0;
     }
 
     public Basket() {
@@ -34,7 +36,7 @@ public class Basket {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
     public Set<Item> getItems() {
         return items;
     }
@@ -50,6 +52,15 @@ public class Basket {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    @Column(name = "total")
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
     }
 
     public void addItem(Item new_item){
