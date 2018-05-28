@@ -13,7 +13,7 @@ public class Seeds {
     public static void main(String[] args) {
 
         User user = new User();
-        Transaction transaction = new Transaction();
+        //Transaction transaction = new Transaction(user);
         Basket basket = new Basket();
         Food food = new Food(Category.FOOD, 3, 1.50, "Apples");
         Electronic electronic = new Electronic(Category.ELECTRONIC, 2, 6.50, "Mouse");
