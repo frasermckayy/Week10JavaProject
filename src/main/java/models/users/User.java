@@ -15,16 +15,15 @@ public class User {
     private Set<Transaction> transaction;
     private models.users.LoyaltyCard loyaltyCard;
     private boolean signedUpForLoyaltyScheme;
-    private Basket basket;
     private String name;
     private String username;
     private String password;
+    private Basket basket;
 
-    public User(LoyaltyCard loyaltyCard, boolean signedUpForLoyaltyScheme, Basket basket, String name, String username, String password) {
+    public User(LoyaltyCard loyaltyCard, boolean signedUpForLoyaltyScheme, String name, String username, String password) {
         this.transaction = new HashSet<>();
         this.loyaltyCard = loyaltyCard;
         this.signedUpForLoyaltyScheme = false;
-        this.basket = basket;
         this.name = name;
         this.username = username;
         this.password = password;
@@ -44,7 +43,7 @@ public class User {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     public Set<Transaction> getTransaction() {
         return transaction;
     }
@@ -71,6 +70,10 @@ public class User {
         this.basket = basket;
     }
 
+    public void assignBasket(Basket basket){
+        setBasket(basket);
+    }
+
     @Column(name = "loyalty_scheme")
     public boolean isSignedUpForLoyaltyScheme() {
         return signedUpForLoyaltyScheme;
@@ -78,6 +81,11 @@ public class User {
 
     public void setSignedUpForLoyaltyScheme(boolean signedUpForLoyaltyScheme) {
         this.signedUpForLoyaltyScheme = signedUpForLoyaltyScheme;
+    }
+
+    public void signUpToLoyaltyScheme(String signUpDate){
+        loyaltyCard.signUp(signUpDate);
+        setSignedUpForLoyaltyScheme(true);
     }
 
     @Column(name = "name")

@@ -51,7 +51,7 @@ public abstract class Item {
         this.basket = basket;
     }
 
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     public Category getCategory() {
         return category;
     }
