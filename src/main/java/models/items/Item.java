@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "items")
 public abstract class Item {
 
     private int id;
@@ -96,6 +97,10 @@ public abstract class Item {
 
     public void removeTransaction(Transaction removedTransaction){
         this.transactions.remove(removedTransaction);
+    }
+
+    public String prettyCategory(){
+        return getCategory().name().toLowerCase();
     }
 
 }
