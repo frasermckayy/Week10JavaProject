@@ -23,9 +23,6 @@ public class StockController {
     private void setUpEndPoints(){
 
 
-        Seeds.seedData();
-
-        staticFileLocation("/public");
 
         get("/stock", (req, res) -> {
             List<Item> items =  DBHelper.getAll(Item.class);
