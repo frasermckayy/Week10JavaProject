@@ -39,16 +39,6 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-
-        get ("/stock/new", (req, res) -> {
-            Map<String, Object> model = new HashMap<>();
-            List<Item> items = DBHelper.getAll(Item.class);
-            model.put("items", items);
-            model.put("template", "templates/stock/create.vtl");
-
-            return new ModelAndView(model,"templates/layout.vtl");
-        }, new VelocityTemplateEngine());
-
         get("/stock/:id", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
             Item item = DBHelper.find(id, Item.class);
