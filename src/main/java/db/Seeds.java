@@ -23,7 +23,7 @@ public class Seeds {
         basket.addItem(food);
 
         Transaction transaction = new Transaction(user, 0, "26/05/2018");
-        transaction.getAmount(basket);
+        //transaction.getAmount(basket);
 
     }
 
