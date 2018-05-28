@@ -49,6 +49,14 @@ public class BasketController {
             return null;
         });
 
+        post( "/basket/update", (req, res) ->{
+
+            // data needs to be added
+
+            res.redirect("/basket");
+            return null;
+        });
+
         post("/basket/delete", (req, res) -> {
 
             //Needs data to be added.
