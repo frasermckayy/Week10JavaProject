@@ -59,7 +59,7 @@ public class BasketTest {
     public void canCalculateTotal(){
         testBasket.addItem(food1);
         testBasket.addItem(food2);
-        assertEquals(9.0, testBasket.calculateTotal(), 0.01);
+        assertEquals(18.0, testBasket.calculateTotal(), 0.01);
     }
 
     @Test
