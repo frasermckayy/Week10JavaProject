@@ -15,6 +15,14 @@ public class Seeds {
         DBHelper.deleteAll(Food.class);
         DBHelper.deleteAll(Clothe.class);
         DBHelper.deleteAll(Electronic.class);
+        DBHelper.deleteAll(User.class);
+
+        // Users
+
+        LoyaltyCard testLoyaltyCard = new LoyaltyCard("n/a");
+        User testUser = new User(testLoyaltyCard, false, "Andrew", "Fraz123", "Pass123");
+
+        DBHelper.save(testLoyaltyCard);DBHelper.save(testUser);
 
         // Food Items
 
