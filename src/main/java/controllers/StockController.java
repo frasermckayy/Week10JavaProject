@@ -49,32 +49,17 @@ public class StockController {
         }, new VelocityTemplateEngine());
 
         post("/stock", (req, res) -> {
-            HashMap<String, Object> model = new HashMap<>();
-            return new ModelAndView(model, "templates/layout.vtl");
+                String item = req.queryParams("item");
+
+
+
+            res.redirect("/stock");
+            return null;
+
         }, new VelocityTemplateEngine());
 
         post("/stock/:id/edit", (req, res) -> {
-            int id = Integer.parseInt(req.queryParams("id"));
-            String category = req.queryParams("food");
-            String category1 = req.queryParams("clothe");
-            String category2 = req.queryParams("electronic");
-            int quantity = Integer.parseInt(req.queryParams("quantity"));
-            double price = Double.parseDouble(req.queryParams("price"));
 
-            if (category == "FOOD") {
-                String name = req.queryParams("name");
-                DBHelper.save("food");
-            }
-            else if (category1 == "CLOTHE") {
-                    String size = req.queryParams("size");
-                    DBHelper.save("size");
-                    String color = req.queryParams("color");
-                    DBHelper.save("color");
-                }
-            else if (category2 == "ELECTRONIC") {
-                String parts = req.queryParams("parts");
-                DBHelper.save("parts");
-            }
 
             res.redirect("/stock/edit");
             return null;
@@ -86,7 +71,6 @@ public class StockController {
             DBHelper.delete(itemToDelete);
             res.redirect("/stock");
             return null;
-
         });
     }
 

@@ -2,6 +2,10 @@
 
 <form action="/stock" method="post">
     <label for="category">Category:</label>
+
+    <select >
+        #foreach( $category in $category )
+        <option value="$category.getId()">$category.getName()</option>
     <select name="category" id="category">
         #foreach( $category in $category )
         <option value="$category.getId()"></option>
@@ -19,3 +23,6 @@
     <input type="submit" value="Save" class="button">
 </form>
 <a href="/stock" class="button center">Cancel</a>
+
+
+
