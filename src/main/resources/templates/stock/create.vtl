@@ -2,14 +2,15 @@
 
 <form action="/stock" method="post">
     <label for="category">Category:</label>
-    <select name="category" id="category"></select>
-
+    <select name="category" id="category">
+        #foreach( $category in $category )
+        <option value="$category.getId()"></option>
+        #end
+    </select>
 
     <label for="quantity">Quantity:</label>
     <select name="quantity" id="quantity"></select>
-    #foreach( $item in $item )
     <option value="$item.getId()"></option>
-    #end
 
     <label for="price">Price(£):</label>
     <select name="price" id="price"></select>
