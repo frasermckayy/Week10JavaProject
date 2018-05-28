@@ -1,5 +1,6 @@
 package models.baskets;
 
+import db.DBHelper;
 import models.items.Item;
 import models.users.User;
 
@@ -65,6 +66,7 @@ public class Basket {
 
     public void addItem(Item new_item){
         this.items.add(new_item);
+        calculateTotal();
     }
 
     public void removeitem(Item removedItem){
