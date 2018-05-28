@@ -20,7 +20,7 @@ public class TransactionController {
         get("/purchase", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
 
-            // Data still to be added.
+
 
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
