@@ -1,6 +1,7 @@
 package db;
 
 import controllers.LoginController;
+import models.users.LoyaltyCard;
 import models.users.User;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
