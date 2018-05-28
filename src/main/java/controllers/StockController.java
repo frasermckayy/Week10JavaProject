@@ -76,7 +76,7 @@ public class StockController {
                 DBHelper.save("parts");
             }
 
-            res.redirect("/stock");
+            res.redirect("/stock/edit");
             return null;
         });
 
