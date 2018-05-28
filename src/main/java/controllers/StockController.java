@@ -38,7 +38,9 @@ public class StockController {
         }, new VelocityTemplateEngine());
 
         post("/stock", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
 
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
         post("/stock/:id/edit", (req, res) -> {
