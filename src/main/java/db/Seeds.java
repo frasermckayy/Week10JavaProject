@@ -1,10 +1,7 @@
 package db;
 
 import models.baskets.Basket;
-import models.items.Category;
-import models.items.Electronic;
-import models.items.Food;
-import models.items.Item;
+import models.items.*;
 import models.transactions.Transaction;
 import models.users.LoyaltyCard;
 import models.users.User;
@@ -12,18 +9,24 @@ import models.users.User;
 public class Seeds {
 
     public static void main(String[] args) {
-      
-        LoyaltyCard loyaltyCard = new LoyaltyCard();
-        User user = new User(loyaltyCard, false,"Andrew", "Fraz123", "pass123");
 
-        Basket basket = new Basket(user);
-        user.assignBasket(basket);
+        Food food1 = new Food(Category.FOOD, 10, 0.99, "Apples");
+        Food food2 = new Food(Category.FOOD, 10, 1.20, "Bananas");
+        Food food3 = new Food(Category.FOOD, 24, 0.10, "Cherries");
 
-        Food food = new Food(Category.FOOD, 3, 1.50, "Apples");
-        basket.addItem(food);
+        DBHelper.save(food1);DBHelper.save(food2);DBHelper.save(food3);
 
-        Transaction transaction = new Transaction(user, 0, "26/05/2018");
-        //transaction.getAmount(basket);
+        Clothe clothe1 = new Clothe(Category.CLOTHE, 3, 5.99, "Red", 'S');
+        Clothe clothe2 = new Clothe(Category.CLOTHE, 3, 3.99, "Blue", 'M');
+        Clothe clothe3 = new Clothe(Category.CLOTHE, 3, 10.0, "Navy", 'L');
+
+        DBHelper.save(clothe1);DBHelper.save(clothe2);DBHelper.save(clothe3);
+
+        Electronic electronic1 = new Electronic(Category.ELECTRONIC, 2, 80.99, "Tablet");
+        Electronic electronic2 = new Electronic(Category.ELECTRONIC, 2, 125.99, "Laptop");
+        Electronic electronic3 = new Electronic(Category.ELECTRONIC, 2, 180.99, "Desktop");
+
+        DBHelper.save(electronic1);DBHelper.save(electronic2);DBHelper.save(electronic3);
 
     }
 
