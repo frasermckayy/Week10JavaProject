@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.Seeds;
 import models.items.Category;
 import models.items.Item;
 import spark.ModelAndView;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.staticFileLocation;
 
 public class StockController {
 
@@ -19,6 +21,11 @@ public class StockController {
     }
 
     private void setUpEndPoints(){
+
+
+        Seeds.seedData();
+
+        staticFileLocation("/public");
 
         get("/stock", (req, res) -> {
             List<Item> items =  DBHelper.getAll(Item.class);
