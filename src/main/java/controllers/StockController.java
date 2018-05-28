@@ -23,8 +23,6 @@ public class StockController {
 
     private void setUpEndPoints(){
 
-
-
         get("/stock", (req, res) -> {
             List<Item> items =  DBHelper.getAll(Item.class);
             HashMap<String, Object> model = new HashMap<>();
