@@ -1,6 +1,8 @@
 package controllers;
 
 import spark.ModelAndView;
+import spark.Request;
+import spark.Response;
 import spark.template.velocity.VelocityTemplateEngine;
 
 import java.util.HashMap;
@@ -18,21 +20,30 @@ public class LoginController {
 
         get("/login", (req, res) ->{
             HashMap<String, Object> model = new HashMap<>();
-
-            //Needs data to be added.
-
-            return new ModelAndView(model, "template/layout.vtl");
+            model.put("template", "templates/login/login.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
         post("/login", (req, res) -> {
-
-            //Needs data to be added.
-
-            res.redirect("/login");
+            String inputUsername = req.queryParams("username");
+            req.session().attribute("username", inputUsername);
+            res.redirect("/shop");
             return null;
         });
 
+        get("/logout", (req, res) -> {
+            req.session().removeAttribute("username");
+            res.redirect("/");
+            return null;
+        }, new VelocityTemplateEngine());
 
+    }
 
+    public static String getLoggedInUsername(Request req, Response res){
+        String username = req.session().attribute("username");
+        if (username == null || username.isEmpty()){
+            res.redirect("/login");
+        }
+        return username;
     }
 }

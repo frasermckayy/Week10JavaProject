@@ -8,7 +8,15 @@ import models.users.User;
 
 public class Seeds {
 
-    public static void main(String[] args) {
+    public static void seedData() {
+
+        // Clearing DB before re-populating tables
+
+        DBHelper.deleteAll(Food.class);
+        DBHelper.deleteAll(Clothe.class);
+        DBHelper.deleteAll(Electronic.class);
+
+        // Food Items
 
         Food food1 = new Food(Category.FOOD, 10, 0.99, "Apples");
         Food food2 = new Food(Category.FOOD, 10, 1.20, "Bananas");
@@ -16,11 +24,15 @@ public class Seeds {
 
         DBHelper.save(food1);DBHelper.save(food2);DBHelper.save(food3);
 
+        // Clothing Items
+
         Clothe clothe1 = new Clothe(Category.CLOTHE, 3, 5.99, "Red", 'S');
         Clothe clothe2 = new Clothe(Category.CLOTHE, 3, 3.99, "Blue", 'M');
         Clothe clothe3 = new Clothe(Category.CLOTHE, 3, 10.0, "Navy", 'L');
 
         DBHelper.save(clothe1);DBHelper.save(clothe2);DBHelper.save(clothe3);
+
+        // Electronic Items
 
         Electronic electronic1 = new Electronic(Category.ELECTRONIC, 2, 80.99, "Tablet");
         Electronic electronic2 = new Electronic(Category.ELECTRONIC, 2, 125.99, "Laptop");
