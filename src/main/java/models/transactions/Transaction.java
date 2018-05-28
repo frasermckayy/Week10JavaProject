@@ -90,6 +90,7 @@ public class Transaction {
     }
 
     public void updateAmount(Basket testBasket) {
-        setAmount(testBasket.calculateTotal());
+        testBasket.calculateTotal();
+        setAmount(testBasket.getTotal());
     }
 }
