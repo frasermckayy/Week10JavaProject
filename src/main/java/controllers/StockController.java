@@ -35,6 +35,7 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+
         get ("/stock/new", (req, res) -> {
             Map<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
