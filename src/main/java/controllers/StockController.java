@@ -23,15 +23,21 @@ public class StockController {
 
     private void setUpEndPoints(){
 
-
-
         get("/stock", (req, res) -> {
             List<Item> items =  DBHelper.getAll(Item.class);
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", items);
-
             model.put("template", "/templates/stocks/index.vtl");
             model.put("template", "templates/stock/index.vtl");
+            model.put("template", "templates/stock/index.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get ("/stock/new", (req, res) -> {
+            Map<String, Object> model = new HashMap<>();
+            List<Item> items = DBHelper.find(id, Item.class);
+            model.put("items", items);
+            model.put("template", "templates/stock/create.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -50,7 +56,7 @@ public class StockController {
             Item item = DBHelper.find(id, Item.class);
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", item);
-            model.put("template", "templates/stocks/show.vtl");
+            model.put("template", "templates/stock/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
@@ -94,7 +100,6 @@ public class StockController {
             return null;
 
         });
-
     }
 
 }
