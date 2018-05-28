@@ -16,6 +16,7 @@ public class StockController {
 
     private void setUpEndPoints(){
 
+
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
 
