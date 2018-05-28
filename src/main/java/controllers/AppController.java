@@ -1,8 +1,10 @@
 package controllers;
 
 
+import db.DBUser;
 import db.Seeds;
 import models.transactions.Transaction;
+import models.users.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -35,7 +37,10 @@ public class AppController {
             HashMap<String, Object> model = new HashMap<>();
 
             // Condensing the code to get the users name into one line.
-            model.put("user", LoginController.getLoggedInUsername(req, res));
+            // model.put("user", LoginController.getLoggedInUsername(req, res));
+
+            User user2 = DBUser.getUser(req, res);
+            model.put("user", DBUser.getUser(req, res));
 
             model.put("template", "templates/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
