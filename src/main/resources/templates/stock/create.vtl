@@ -3,7 +3,7 @@
 <form action="/stock" method="post">
     <label for="category">Category:</label>
 
-    <select >
+    <select>
         #foreach( $category in $category )
         <option value="$category.getId()">$category.getName()</option>
     <select name="category" id="category">
@@ -21,7 +21,8 @@
 
 
     <input type="submit" value="Save" class="button">
-</form>
+    </select>
+ </form>
 <a href="/stock" class="button center">Cancel</a>
 
 
