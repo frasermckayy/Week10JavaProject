@@ -29,8 +29,6 @@ public class StockController {
             List<Item> items =  DBHelper.getAll(Item.class);
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", items);
-
-            model.put("template", "/templates/stocks/index.vtl");
             model.put("template", "templates/stock/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
