@@ -2,9 +2,9 @@
 
 <form action="/stock" method="post">
     <label for="category">Category:</label>
-    <select >
+    <select>
         #foreach( $category in $category )
-        <option value="$category.getId()">$category.getName()</option>
+        <option value="$category.getId()">$category.getId()</option>
         #end
     </select>
 
