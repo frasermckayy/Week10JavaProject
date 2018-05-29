@@ -1,23 +1,17 @@
-<p class="pageHeader">Users</p>
+<h1>Hello $user.getUsername() </h1>
 
-<h1>User</h1>
+<p>Your name: $user.getName() </p>
 
-<div class="container">
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Basket</th>
-        <th>Loyalty Card</th>
-    </tr>
+<p>Your password: $user.getPassword() </p>
 
-    #foreach($user in $users)
-    <tr>
-        <td>$user.getName()</td>
-        <td>$user.getUsername()</td>
-        <td>$user.getBasket()</td>
-        <td>$user.getLoyaltyCard()</td>
-    </tr>
-    #end
-</table>
-</div>
+<p><a href="/user/transaction-history">Your transaction history</a> </p>
+
+<p><a href="/user/loyalty-card">Your loyalty card</a></p>
+
+<form action="/user/edit" method="get">
+    <button type="submit">Edit my details</button>
+</form>
+
+<form action="/user/delete" method="post">
+    <button type="submit">Delete my account</button>
+</form>
