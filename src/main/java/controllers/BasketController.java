@@ -1,6 +1,7 @@
 package controllers;
 
 
+import db.DBBasket;
 import db.DBHelper;
 import db.DBItem;
 import db.DBUser;
@@ -64,10 +65,19 @@ public class BasketController {
 
         get("/basket/purchase", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
+            DBBasket.applyDiscounts(DBUser.getUser(req, res).getBasket());
             model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/basket/purchase.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/basket/confirm", (req, res) -> {
+
+
+
+            res.redirect("/basket/confirm");
+            return null;
+        });
 
         get("/basket/confirm", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
@@ -75,17 +85,6 @@ public class BasketController {
             model.put("template", "templates/basket/confirm.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
-
-        post("/basket/confirm", (req, res) -> {
-            res.redirect("/basket/confirm");
-            return null;
-        });
-
-        post("/basket/edit", (req, res) -> {
-            //Needs data to be added.
-            res.redirect("/basket");
-            return null;
-        });
 
         post("/basket/delete/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
@@ -96,5 +95,14 @@ public class BasketController {
             res.redirect("/basket");
             return null;
         });
+
+        // Still to be added
+        post("/basket/edit", (req, res) -> {
+            //Needs data to be added.
+            res.redirect("/basket");
+            return null;
+        });
+
+
     }
 }

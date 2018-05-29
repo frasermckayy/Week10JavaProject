@@ -26,4 +26,12 @@ public class DBBasket {
         return foundBasket;
     }
 
+    public static void applyDiscounts(Basket basket){
+        basket.calculateTotal();
+        basket.buyOneGetOneFree();
+        basket.tenPercentOffPurchasesOver100();
+        basket.loyaltyDiscount();
+        DBHelper.save(basket);
+    }
+
 }

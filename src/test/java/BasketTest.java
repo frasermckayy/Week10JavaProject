@@ -88,7 +88,8 @@ public class BasketTest {
         Electronic laptop = new Electronic(Category.ELECTRONIC, 1, 150, "XF100");
         testBasket.addItem(laptop);
         testBasket.calculateTotal();
-        testBasket.loyaltyDiscount(user);
+        testBasket.setUser(user);
+        testBasket.loyaltyDiscount();
         assertEquals(135, testBasket.getTotal(), 0.01);
     }
 }
