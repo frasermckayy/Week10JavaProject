@@ -7,7 +7,7 @@
     <label for="quantity">Quantity:</label>
     <select name="quantity" id="quantity">
     #foreach( $quantity in $items)
-    <option value="$quantity.getId()">$user.getName()</option>
+    <option value="$quantity">$quantity</option>
     #end
     </select>
 
@@ -16,6 +16,7 @@
 
 
     <input type="submit" value="Save" class="button">
+
 </form>
 <a href="/stock" class="button center">Cancel</a>
 
