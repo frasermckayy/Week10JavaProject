@@ -25,7 +25,7 @@ public class BasketController {
 
     private void setUpEndPoints() {
 
-        get("/basket", (req, res) ->{
+        get("/basket", (req, res) -> {
          HashMap<String, Object> model = new HashMap<>();
          model.put("user", DBUser.getUser(req, res));
          model.put("template", "templates/basket/index.vtl");
@@ -62,9 +62,22 @@ public class BasketController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/basket/purchase", (req, res) -> {
-            // Data to be added.
-            res.redirect("/basket");
+        get("/basket/purchase", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/basket/purchase.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/basket/confirm", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/basket/confirm.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/basket/confirm", (req, res) -> {
+            res.redirect("/basket/confirm");
             return null;
         });
 
