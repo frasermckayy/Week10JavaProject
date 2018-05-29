@@ -3,13 +3,29 @@
 <table>
 
     <tr>
-        Discounts Applied:
+        <th>Discounts Applied:</th>
+        <th>BoGoF</th>
+        <th>Ten Percent Off Purchases over £100</th>
+        <th>Loyalty Discount</th>
     </tr>
 
     <tr>
-        <th></th>
-        <th></th>
-        <th></th>
+        <th>   </th>
+        #if ( $user.getBasket().isBogof() )
+            <th> $user.getBasket().isBogof() </th>
+        #else
+            <th> false </th>
+        #end
+        #if ( $user.getBasket().isOver100() )
+            <th> $user.getBasket().isOver100() </th>
+        #else
+            <th> false </th>
+        #end
+        #if ( $user.getBasket().isLoyaltyDiscount() )
+            <th> $user.isLoyaltyDiscount() </th>
+        #else
+            <th> false </th>
+        #end
     </tr>
 
 </table>
