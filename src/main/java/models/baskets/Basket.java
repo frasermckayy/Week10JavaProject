@@ -6,6 +6,7 @@ import models.users.User;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -16,11 +17,17 @@ public class Basket {
     private Set<Item> items;
     private User user;
     private double total;
+    private boolean bogof;
+    private boolean over100;
+    private boolean loyaltyDiscount;
 
     public Basket(User user) {
         this.items = new HashSet<>();
         this.user = user;
         this.total = 0;
+        this.bogof = false;
+        this.over100 = false;
+        this.loyaltyDiscount = false;
     }
 
     public Basket() {
@@ -64,6 +71,33 @@ public class Basket {
         this.total = total;
     }
 
+    @Column(name = "bogof")
+    public boolean isBogof() {
+        return bogof;
+    }
+
+    public void setBogof(boolean bogof) {
+        this.bogof = bogof;
+    }
+
+    @Column(name = "over_100")
+    public boolean isOver100() {
+        return over100;
+    }
+
+    public void setOver100(boolean over100) {
+        this.over100 = over100;
+    }
+
+    @Column(name = "loyaly_discount")
+    public boolean isLoyaltyDiscount() {
+        return loyaltyDiscount;
+    }
+
+    public void setLoyaltyDiscount(boolean loyaltyDiscount) {
+        this.loyaltyDiscount = loyaltyDiscount;
+    }
+
     public void addItem(Item new_item){
         this.items.add(new_item);
         calculateTotal();
@@ -92,6 +126,7 @@ public class Basket {
         double sum = 0;
         for (Item item : this.items){
             if (item.getQuantity() > 5) {
+                setBogof(true);
                 if (item.getQuantity() % 2 == 0) {
                     sum += item.getPrice() * (item.getQuantity() / 2);
                 } else {
@@ -105,12 +140,14 @@ public class Basket {
     public void tenPercentOffPurchasesOver100(){
         if (this.total >= 100) {
             this.total *= 0.9;
+            setOver100(true);
         }
     }
 
-    public void loyaltyDiscount(User customer){
-        if (customer.isSignedUpForLoyaltyScheme()){
+    public void loyaltyDiscount(){
+        if (user.isSignedUpForLoyaltyScheme()){
             this.total *= 0.9;
+            setLoyaltyDiscount(true);
         }
     }
 

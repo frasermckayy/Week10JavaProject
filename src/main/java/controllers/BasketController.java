@@ -1,14 +1,13 @@
 package controllers;
 
 
-import db.DBHelper;
-import db.DBItem;
-import db.DBUser;
+import db.*;
 import models.baskets.Basket;
 import models.items.Clothe;
 import models.items.Electronic;
 import models.items.Food;
 import models.items.Item;
+import models.transactions.Transaction;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -16,6 +15,7 @@ import java.util.HashMap;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.threadPool;
 
 public class BasketController {
 
@@ -25,7 +25,7 @@ public class BasketController {
 
     private void setUpEndPoints() {
 
-        get("/basket", (req, res) ->{
+        get("/basket", (req, res) -> {
          HashMap<String, Object> model = new HashMap<>();
          model.put("user", DBUser.getUser(req, res));
          model.put("template", "templates/basket/index.vtl");
@@ -62,17 +62,27 @@ public class BasketController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/basket/purchase", (req, res) -> {
-            // Data to be added.
-            res.redirect("/basket");
+        get("/basket/purchase", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            DBBasket.applyDiscounts(DBUser.getUser(req, res).getBasket());
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/basket/purchase.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/basket/confirm", (req, res) -> {
+            DBTransaction.createTransaction(req, res);
+
+            res.redirect("/basket/confirm");
             return null;
         });
 
-        post("/basket/edit", (req, res) -> {
-            //Needs data to be added.
-            res.redirect("/basket");
-            return null;
-        });
+        get("/basket/confirm", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/basket/confirm.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
         post("/basket/delete/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
@@ -83,5 +93,14 @@ public class BasketController {
             res.redirect("/basket");
             return null;
         });
+
+        // Still to be added
+        post("/basket/edit", (req, res) -> {
+            //Needs data to be added.
+            res.redirect("/basket");
+            return null;
+        });
+
+
     }
 }
