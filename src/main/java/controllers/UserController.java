@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBTransaction;
 import db.DBUser;
 import models.items.Item;
 import models.transactions.Transaction;
@@ -32,11 +33,13 @@ public class UserController {
 
         get("/user/transaction-history", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            model.put("template", "templates/user/index.vtl");
+            model.put("transactions", DBTransaction.findUsersTransactions(DBUser.getUser(req, res)));
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/user/history.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/user/:/id/edit", (req, res) -> {
+        get("/user/edit", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             String stringId = req.params(":id");
             Integer intId = Integer.parseInt(stringId);

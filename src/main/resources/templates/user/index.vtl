@@ -1,4 +1,4 @@
-<h1>$user.getUsername() 's account: </h1>
+<h1>Hello $user.getUsername() </h1>
 
 <p>Your name: $user.getName() </p>
 
@@ -7,3 +7,11 @@
 <p><a href="/user/transaction-history">Your transaction history</a> </p>
 
 <p><a href="/user/loyalty-card">Your loyalty card</a></p>
+
+<form action="/user/edit" method="get">
+    <button type="submit">Edit my details</button>
+</form>
+
+<form action="/user/delete" method="post">
+    <button type="submit">Delete my account</button>
+</form>
