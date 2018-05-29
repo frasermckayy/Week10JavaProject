@@ -1,21 +1,9 @@
-<h1>User</h1>
+<h1>$user.getUsername() 's account: </h1>
 
-<div class="container">
-<table>
-    <tr>
-        <th>Name</th>
-        <th>Username</th>
-        <th>Basket</th>
-        <th>Loyalty Card</th>
-    </tr>
+<p>Your name: $user.getName() </p>
 
-    #foreach($user in $users)
-    <tr>
-        <td>$user.getName()</td>
-        <td>$user.getUsername()</td>
-        <td>$user.getBasket()</td>
-        <td>$user.getLoyaltyCard()</td>
-    </tr>
-    #end
-</table>
-</div>
+<p>Your password: $user.getPassword() </p>
+
+<p><a href="/user/transaction-history">Your transaction history</a> </p>
+
+<p><a href="/user/loyalty-card">Your loyalty card</a></p>
