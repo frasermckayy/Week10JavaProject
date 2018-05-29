@@ -15,14 +15,13 @@
             <td>$item.getCategory()</td>
             <td>$item.getQuantity()</td>
             <td>$item.getPrice()</td>
-            <td><a href="/stock/$item.getId()" class ="button center">Edit</a></td>
+            <td><a href="/stock/$item.getId()/edit" class ="button center">Edit</a></td>
             <td> <form action="/stock/$item.getId()/delete" method="post">
                  <input type="submit" value="Delete" class="button center">
             </form></td>
         <tr>
             #end
 
-        <a href="/stock/new" class="button center">Add Item</a>
     </table>
 
 

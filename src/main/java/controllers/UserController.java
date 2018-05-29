@@ -51,6 +51,7 @@ public class UserController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        //NOT WORKING
         post("/user", (req, res) -> {
             int transactionId = Integer.parseInt(req.queryParams("transaction"));
             List<Transaction> transactions = DBHelper.getAll(Transaction.class);

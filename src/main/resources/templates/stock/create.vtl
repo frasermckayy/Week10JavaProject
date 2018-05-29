@@ -2,22 +2,17 @@
 
 <form action="/stock/new" method="post">
     <label for="category">Category:</label>
-<<<<<<< Updated upstream
-
     <select>
         #foreach( $category in $category )
-        <option value="$category.getId()">$category.getName()</option>
+        <option value="$category.getId()">$category.getId()</option>
     <select name="category" id="category">
         #foreach( $category in $category )
         <option value="$category.getId()"></option>
         #end
     </select>
-=======
     <select name="" id=""></select>
     <select>
-
->>>>>>> Stashed changes
-
+    
     <label for="quantity">Quantity:</label>
     <select name="quantity" id="quantity"></select>
 
