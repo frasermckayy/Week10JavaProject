@@ -1,0 +1,26 @@
+<h1>This is your basket: </h1>
+
+<p>You currently have the following stored for purchase: </p>
+
+<table>
+
+    <tr>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+
+    #foreach ( $item in $user.getBasket().getItems() )
+    <tr>
+        <th> $item.getCategory() </th>
+        <th> $item.getQuantity() </th>
+        <th> $item.getPrice() </th>
+        <th>
+        <form action="/basket/$item.prettyCategory()/$item.getId()" method="get">
+            <button type="submit">View/Edit this product</button>
+        </form>
+        </th>
+    </tr>
+    #end
+
+</table>

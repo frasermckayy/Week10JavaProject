@@ -1,0 +1,29 @@
+<p class="pageHeader">New Item</p>
+
+<form action="/stock/new" method="post">
+
+    <label for="category">Category:</label>
+    <select  name="category" id="category">
+        #foreach($category in $categories)
+        <option value="$category">$category</option>
+
+        #end
+    </select>
+
+    <label for="quantity">Quantity:</label>
+    <input type="number" name="quantity" id="quantity" required="true">
+
+    <label for="price">Price(£):</label>
+    <input type="number" name="quantity" id="price" required="true">
+
+
+
+    <input type="submit" value="Save" class="button">
+
+
+
+ </form>
+<a href="/stock" class="button center">Cancel</a>
+
+
+

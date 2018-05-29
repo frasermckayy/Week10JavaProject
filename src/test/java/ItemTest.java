@@ -29,4 +29,9 @@ public class ItemTest {
         assertEquals(1.50, food.getPrice(), 0.01);
     }
 
+    @Test
+    public void canGetPrettyCategory(){
+        assertEquals("food", food.prettyCategory());
+    }
+
 }

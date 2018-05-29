@@ -13,16 +13,15 @@ import java.util.Set;
 public class Transaction {
 
     private int id;
-    private User user;
+    private User customer;
     private double amount;
     private String date;
     private Set<Item> items;
 
-    public Transaction(User user, double amount, String date) {
-        this.user = user;
+    public Transaction(User customer, double amount, String date) {
+        this.customer = customer;
         this.amount = amount;
         this.date = date;
-        this.items = items;
         this.items = new HashSet<>();
     }
 
@@ -41,13 +40,13 @@ public class Transaction {
     }
 
     @ManyToOne
-    @JoinColumn(name="user", nullable = false)
-    public User getUser() {
-        return user;
+    @JoinColumn(name="customer", nullable = false)
+    public User getCustomer() {
+        return customer;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setCustomer(User customer) {
+        this.customer = customer;
     }
 
     @Column(name = "amount")
@@ -80,8 +79,10 @@ public class Transaction {
         this.items = items;
     }
 
-    public void addItem(Item newItem){
-        this.items.add(newItem);
+    public void addItem(Set<Item> newItems){
+        for(Item item : newItems){
+            this.items.add(item);
+        }
     }
 
     public void removeItem(Item removedItem){
@@ -89,6 +90,7 @@ public class Transaction {
     }
 
     public void updateAmount(Basket testBasket) {
-        setAmount(testBasket.calculateTotal());
+        testBasket.calculateTotal();
+        setAmount(testBasket.getTotal());
     }
 }
