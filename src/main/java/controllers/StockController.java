@@ -34,21 +34,19 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get ("/stock/new", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            List<Item> items = DBHelper.getAll(Item.class);
+            model.put("items", items);
+            model.put("template", "templates/stock/create.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
         get("/stock/:id", (req, res) -> {
              HashMap<String, Object> model = new HashMap<>();
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get ("/stock/new", (req, res) -> {
-
-            Map<String, Object> model = new HashMap<>();
-            HashMap<String, Object> model = new HashMap<>();
-            List<Item> items = DBHelper.getAll(Item.class);
-            model.put("items", items);
-            HashMap<String, Object> model = new HashMap<>();
-            model.put("template", "templates/stock/create.vtl");
-            return new ModelAndView(model, "templates/layout.vtl");
-        }, new VelocityTemplateEngine());
 
         get("/stock/:id", (req, res) -> {
              HashMap<String, Object> model = new HashMap<>();
