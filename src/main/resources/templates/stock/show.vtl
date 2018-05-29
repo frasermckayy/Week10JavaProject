@@ -1,21 +1,23 @@
 <p class="pageHeader">Edit stock Items</p>
 
-<form action="/stock:id/edit" method="post">
-    <label for="category">Category:</label>
-    <input class="inputbox" type="text" name="category" required="true">
+<form action="/stock/$stock.getId()/edit" method="post">
 
-    <label for="quantity">Quantity:</label>
-    <select name="quantity" id="quantity">
-    #foreach( $quantity in $items)
-    <option value="$quantity">$quantity</option>
+<label for="category">Category:</label>
+<select  name="category" id="category">
+    #foreach($category in $categories)
+    <option value="$category">$category</option>
+
     #end
-    </select>
+</select>
 
-    <label for="price">Price:</label>
-    <input class="inputbox" type="text" name="price" required="true">
+<label for="quantity">Quantity:</label>
+<input type="number" name="quantity" id="quantity" required="true">
+
+<label for="price">Price(£):</label>
+<input type="number" name="price" id="price" required="true">
 
 
-    <input type="submit" value="Save" class="button">
+<input type="submit" value="Save" class="button">
 
 </form>
 <a href="/stock" class="button center">Cancel</a>
