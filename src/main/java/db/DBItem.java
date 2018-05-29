@@ -19,7 +19,7 @@ public class DBItem {
         Item item = DBHelper.find(id, Item.class);
         int quantityToReturn = item.getQuantity();
         DBHelper.delete(item);
-        DBStock.returnStock(id, quantityToReturn);
+        DBStock.returnStock(item, quantityToReturn);
     }
 
 }
