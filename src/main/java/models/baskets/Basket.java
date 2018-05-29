@@ -82,6 +82,7 @@ public class Basket {
     }
 
     public void calculateTotal(){
+        total = 0;
         for (Item item : this.items){
             this.total += (item.getPrice() * item.getQuantity());
         }

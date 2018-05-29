@@ -30,7 +30,7 @@ public class StockController {
             List<Item> items =  DBHelper.getAll(Item.class);
             List<User> user = DBHelper.getAll(User.class);
             model.put("stock", items);
-            model.put("user", user);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -41,6 +41,7 @@ public class StockController {
             List<Item> items = DBHelper.getAll(Item.class);
 
             model.put("items", items);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/create.vtl");
             model.put("categories", Category.values());
             return new ModelAndView(model, "templates/layout.vtl");
@@ -59,6 +60,7 @@ public class StockController {
             HashMap<String, Object> model = new HashMap<>();
             model.put("user", user);
             model.put("stock", item);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());

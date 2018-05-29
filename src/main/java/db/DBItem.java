@@ -15,4 +15,11 @@ public class DBItem {
         DBHelper.update(transaction);
     }
 
+    public static void deleteItem(int id){
+        Item item = DBHelper.find(id, Item.class);
+        int quantityToReturn = item.getQuantity();
+        DBHelper.delete(item);
+        DBStock.returnStock(id, quantityToReturn);
+    }
+
 }
