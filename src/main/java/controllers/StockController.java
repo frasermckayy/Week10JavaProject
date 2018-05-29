@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBStock;
 import db.DBUser;
 import db.Seeds;
 import models.items.*;
@@ -26,7 +27,7 @@ public class StockController {
 
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Item> items =  DBHelper.getAll(Item.class);
+            List<Item> items = DBStock.getAllStock();
             List<User> user = DBHelper.getAll(User.class);
             model.put("stock", items);
             model.put("user", DBUser.getUser(req, res));
