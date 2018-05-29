@@ -33,7 +33,37 @@ public class DBStock {
         return electronicStock;
     }
 
-    public static void returnStock(int id, int quantity){
+    public static void returnStock(Item item){
+
+        if (item.prettyCategory().equals("food")){
+            List<Food> foodList = getFoodStock();
+            Food tempFood = (Food) item;
+            for (Food food : foodList){
+                if (tempFood.getName().equals(food.getName())){
+                    food.setQuantity(food.getQuantity() + item.getQuantity());
+                    DBHelper.save(food);
+                }
+            }
+
+        } else if (item.prettyCategory().equals("clothe")){
+            List<Clothe> clotheList = getClotheStock();
+            Clothe tempClothe = (Clothe) item;
+            for (Clothe clothe : clotheList){
+                if ((clothe.getColor().equals(tempClothe.getColor()))  && (clothe.getSize() == tempClothe.getSize())){
+                    clothe.setQuantity(clothe.getQuantity() + item.getQuantity());
+                    DBHelper.save(clothe);
+                }
+            }
+
+        } else if (item.prettyCategory().equals("electronic")){
+            List<Electronic> electronicList = getElectronicStock();
+            Electronic tempElectronic = (Electronic) item;
+            for (Electronic electronic : electronicList){
+                if (electronic.getParts().equals(tempElectronic.getParts())){
+                    electronic.setQuantity(electronic.getQuantity() + item.getQuantity());
+                }
+            }
+        }
 
     }
 
