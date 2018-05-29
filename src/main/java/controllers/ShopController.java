@@ -1,8 +1,6 @@
 package controllers;
 
-import db.DBBasket;
-import db.DBHelper;
-import db.DBUser;
+import db.*;
 import models.baskets.Basket;
 import models.items.Clothe;
 import models.items.Electronic;
@@ -38,16 +36,8 @@ public class ShopController {
         // FOOD SECTION
         get("/shop/food", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Food> foods = DBHelper.getAll(Food.class);
-
-//            for(Food food : foods){
-//                if (food.getBasket() == null){
-//                    foods.remove(food);
-//                }
-//            }
-
+            List<Food> foods = DBStock.getFoodStock();
             model.put("user", DBUser.getUser(req, res));
-
             model.put("items", foods);
             model.put("template", "templates/shop/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
@@ -91,7 +81,7 @@ public class ShopController {
         // CLOTHES SECTION
         get("/shop/clothes", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Clothe> clothes = DBHelper.getAll(Clothe.class);
+            List<Clothe> clothes = DBStock.getClotheStock();
             model.put("user", DBUser.getUser(req, res));
             model.put("items", clothes);
             model.put("template", "templates/shop/show.vtl");
@@ -135,7 +125,7 @@ public class ShopController {
         // ELECTRONIC SECTION
         get("/shop/electronic", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Electronic> electronics = DBHelper.getAll(Electronic.class);
+            List<Electronic> electronics = DBStock.getElectronicStock();
             model.put("items", electronics);
             model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/shop/show.vtl");
