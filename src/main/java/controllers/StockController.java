@@ -39,7 +39,6 @@ public class StockController {
         get ("/stock/new", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
-
             model.put("items", items);
             model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/create.vtl");
@@ -69,9 +68,28 @@ public class StockController {
         get("/stock/new/food", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
 
-
+            model.put("user", DBUser.getUser(req, res));
+            model.put("food", "templates/stock/food.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        get("stock/new/clothe", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("clothe", "templates/stock/clothe.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("stock/new/electronic", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            int id = Integer.parseInt(req.params("id"));
+            Item item = DBHelper.find(id, Item.class);
+            model.put("item", item);
+            model.put("user", DBUser.getUser(req, res));
+            model.put("electronic", "templates/stock/electronic.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
 
 
         post("/stock", (req, res) -> {
@@ -80,15 +98,6 @@ public class StockController {
             return null;
         }, new VelocityTemplateEngine());
 
-        post("/stock/new/food", (req, res) -> {
-            String category = req.queryParams("category");
-            int quantity = Integer.parseInt(req.queryParams("quantity"));
-            int price = Integer.parseInt(req.params("price"));
-            String name = req.queryParams("name");
-
-            res.redirect("/stock");
-            return null;
-        });
 
         post ("/stock/:id/edit", (req, res) -> {
             String strId = req.params(":id");
@@ -97,15 +106,46 @@ public class StockController {
             Category category = Category.valueOf(req.queryParams("category"));
             int quantity = Integer.parseInt(req.queryParams("quantity"));
             int price = Integer.parseInt(req.queryParams("price"));
-
             item.setCategory(category);
             item.setQuantity(quantity);
             item.setPrice(price);
             DBHelper.update(item);
             res.redirect("/stock");
             return null;
-
         }, new VelocityTemplateEngine());
+
+
+        post("/stock/new/food", (req, res) ->{
+            String category = req.queryParams("category");
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.params("price"));
+            String name = req.queryParams("name");
+            res.redirect("/stock");
+            return null;
+        });
+
+        post("/stock/new/clothe", (req, res) -> {
+            String category = req.queryParams("category");
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.params("price"));
+            String color = req.queryParams("color");
+            String size = req.queryParams("size");
+
+
+            res.redirect("/stock");
+            return null;
+        });
+
+        post("/stock/new/electronic", (req, res) -> {
+            String category = req.queryParams("category");
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.params("price"));
+            String parts = req.queryParams("parts");
+
+
+            res.redirect("/stock");
+            return null;
+        });
 
         post("/stock/:id/delete", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
