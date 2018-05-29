@@ -1,21 +1,17 @@
-<p class="pageHeader">New Item</p>
+<p class="pageHeader">Add new stock item</p>
 
-<form action="/stock/new" method="post">
+<p>Please select the category of the new item you are adding to stock supply: </p>
+
+<form action="/stock/new/item" method="post">
 
     <label for="category">Category:</label>
-    <select  name="category" id="category">
+    <select name="category" id="category">
         #foreach($category in $categories)
         <option value="$category">$category</option>
         #end
     </select>
 
-    <label for="quantity">Quantity:</label>
-    <input type="number" name="quantity" id="quantity" required="true">
-
-    <label for="price">Price(£):</label>
-    <input type="number" name="quantity" id="price" required="true">
-
-    <input type="submit" value="Save" class="button">
+    <input type="submit" value="Submit" class="button">
 
  </form>
 <a href="/stock" class="button center">Cancel</a>

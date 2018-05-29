@@ -15,6 +15,12 @@ public class DBStock {
 
     private static Session session;
 
+    public static List<Item> getAllStock(){
+        List<Item> stock = DBHelper.getAll(Item.class);
+        stock.removeIf(Item -> Item.getBasket() != null);
+        return stock;
+    }
+
     public static List<Food> getFoodStock(){
         List<Food> foodStock = DBHelper.getAll(Food.class);
         foodStock.removeIf(Food -> Food.getBasket() != null );
