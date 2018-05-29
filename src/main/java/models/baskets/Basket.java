@@ -1,5 +1,6 @@
 package models.baskets;
 
+import db.DBHelper;
 import models.items.Item;
 import models.users.User;
 
@@ -14,10 +15,12 @@ public class Basket {
     private int id;
     private Set<Item> items;
     private User user;
+    private double total;
 
     public Basket(User user) {
         this.items = new HashSet<>();
         this.user = user;
+        this.total = 0;
     }
 
     public Basket() {
@@ -34,7 +37,7 @@ public class Basket {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "basket")
+    @OneToMany(mappedBy = "basket", fetch = FetchType.EAGER)
     public Set<Item> getItems() {
         return items;
     }
@@ -52,8 +55,18 @@ public class Basket {
         this.user = user;
     }
 
+    @Column(name = "total")
+    public double getTotal() {
+        return total;
+    }
+
+    public void setTotal(double total) {
+        this.total = total;
+    }
+
     public void addItem(Item new_item){
         this.items.add(new_item);
+        calculateTotal();
     }
 
     public void removeitem(Item removedItem){
@@ -68,15 +81,13 @@ public class Basket {
         return this.items.size();
     }
 
-    public double calculateTotal(){
-        double sum = 0;
+    public void calculateTotal(){
         for (Item item : this.items){
-            sum += (item.getPrice() * item.getQuantity());
+            this.total += (item.getPrice() * item.getQuantity());
         }
-        return sum;
     }
 
-    public double buyOneGetOneFree(){
+    public void buyOneGetOneFree(){
         double sum = 0;
         for (Item item : this.items){
             if (item.getQuantity() > 5) {
@@ -87,23 +98,19 @@ public class Basket {
                 }
             }
         }
-        return sum;
+        this.total -= sum;
     }
 
-    public double tenPercentOffPurchasesOver100(){
-        double sum = 0;
-        if (calculateTotal() > 100) {
-            sum = calculateTotal() * 0.9;
+    public void tenPercentOffPurchasesOver100(){
+        if (this.total >= 100) {
+            this.total *= 0.9;
         }
-        return sum;
     }
 
-    public double loyaltyDiscount(User customer){
-        double sum = 0;
+    public void loyaltyDiscount(User customer){
         if (customer.isSignedUpForLoyaltyScheme()){
-            sum = calculateTotal() * 0.9;
+            this.total *= 0.9;
         }
-        return sum;
     }
 
 }

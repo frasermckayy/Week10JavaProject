@@ -5,7 +5,11 @@
     <input class="inputbox" type="text" name="category" required="true">
 
     <label for="quantity">Quantity:</label>
-    <input class="inputbox" type="text" name="quantity" required="true">
+    <select name="quantity" id="quantity">
+    #foreach( $quantity in $items)
+    <option value="$quantity.getId()">$user.getName()</option>
+    #end
+    </select>
 
     <label for="price">Price:</label>
     <input class="inputbox" type="text" name="price" required="true">
@@ -14,4 +18,5 @@
     <input type="submit" value="Save" class="button">
 </form>
 <a href="/stock" class="button center">Cancel</a>
+
 

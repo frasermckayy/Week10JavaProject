@@ -5,21 +5,23 @@
             <link href="/style.css" rel="stylesheet" type="text/css" />
     </head>
 
-    <ul>
+    <ul class="flex-container space-between">
         <li><a href="/">Home</a></li>
         <li><a href="/shop">Shop</a></li>
+        <li><a href="/basket">Your Basket</a></li>
         <li><a href="/stock">Stock Control Panel</a></li>
         <li><a href="/user">User Panel</a></li>
     </ul>
 
     <body>
-
+    
         <p>Welcome $user.getName() <a href="/logout">Logout</a> </p>
-
+        <p>Your total in basket: £ $basket.getTotal() </p>
         <!-- begin inner template-->
         <div class="container">
             #parse( $template )
         </div>
         <!-- end inner template-->
+        
     </body>
 </html>
