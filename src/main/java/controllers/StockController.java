@@ -40,14 +40,22 @@ public class StockController {
         }, new VelocityTemplateEngine());
 
         get ("/stock/new", (req, res) -> {
+
+            Map<String, Object> model = new HashMap<>();
             HashMap<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
             model.put("items", items);
+            HashMap<String, Object> model = new HashMap<>();
             model.put("template", "templates/stock/create.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/stock/:id", (req, res) -> {
+             HashMap<String, Object> model = new HashMap<>();
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
 
+   
         get("/stock/:id/edit", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
             Item item = DBHelper.find(id, Item.class);
@@ -64,7 +72,6 @@ public class StockController {
             String item = req.queryParams("item");
             res.redirect("/stock");
             return null;
-
         }, new VelocityTemplateEngine());
 
 
@@ -72,6 +79,12 @@ public class StockController {
             int id = Integer.parseInt(req.params(":id"));
             Item itemToDelete = DBHelper.find(id, Item.class);
             DBHelper.delete(itemToDelete);
+            res.redirect("/stock");
+            return null;
+        });
+
+        post("/stock/new", (req, res) -> {
+            int id = Integer.parseInt(req.params("id"));
             res.redirect("/stock");
             return null;
         });
