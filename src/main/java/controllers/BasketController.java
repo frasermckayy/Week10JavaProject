@@ -1,15 +1,13 @@
 package controllers;
 
 
-import db.DBBasket;
-import db.DBHelper;
-import db.DBItem;
-import db.DBUser;
+import db.*;
 import models.baskets.Basket;
 import models.items.Clothe;
 import models.items.Electronic;
 import models.items.Food;
 import models.items.Item;
+import models.transactions.Transaction;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -17,6 +15,7 @@ import java.util.HashMap;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.threadPool;
 
 public class BasketController {
 
@@ -72,8 +71,7 @@ public class BasketController {
         }, new VelocityTemplateEngine());
 
         post("/basket/confirm", (req, res) -> {
-
-
+            DBTransaction.createTransaction(req, res);
 
             res.redirect("/basket/confirm");
             return null;
