@@ -13,8 +13,7 @@
         #end
     </tr>
 
-    <tr>
-        <form action="/shop/$items.prettyCategory()/$items.getId()/add" method="post">
+    <tr></tr>
             <th> $items.getQuantity() </th>
             <th> $items.getPrice() </th>
             #if ( $items.get(0).getCategory() == "FOOD" )
@@ -25,11 +24,12 @@
             #elseif ( $items.get(0).getCategory() == "ELECTRONIC" )
                     <th> $items.getParts() </th>
             #end
-            <th>
-                <input type="number" name="quantity" required="true">
-            </th>
-            <th>
-                <button type="submit">Add to Basket</button>
+            <form action="/shop/$items.prettyCategory()/$items.getId()/add" method="post">
+                <th>
+                    <input type="number" name="quantity" required="true">
+                </th>
+                <th>
+                    <button type="submit">Add to Basket</button>
             </th>
         </form>
     </tr>
