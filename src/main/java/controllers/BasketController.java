@@ -2,6 +2,7 @@ package controllers;
 
 
 import db.DBHelper;
+import db.DBItem;
 import db.DBUser;
 import models.items.Clothe;
 import models.items.Electronic;
@@ -40,7 +41,7 @@ public class BasketController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        get("/basket/clothes/:id", (req, res) -> {
+        get("/basket/clothe/:id", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             int id = Integer.parseInt(req.params(":id"));
             Clothe clothe = DBHelper.find(id, Clothe.class);
@@ -60,20 +61,23 @@ public class BasketController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        post("/basket/purchase", (req, res) -> {
+            // Data to be added.
+            res.redirect("/basket");
+            return null;
+        });
+
         post("/basket/edit", (req, res) -> {
-
             //Needs data to be added.
-
             res.redirect("/basket");
             return null;
         });
 
         post("/basket/delete/:id", (req, res) -> {
-            int id = Integer.parseInt(req.queryParams(":id"));
-
+            int id = Integer.parseInt(req.params(":id"));
+            DBItem.deleteItem(id);
             res.redirect("/basket");
             return null;
         });
-
     }
-    }
+}

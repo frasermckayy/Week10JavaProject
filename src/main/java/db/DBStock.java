@@ -33,5 +33,9 @@ public class DBStock {
         return electronicStock;
     }
 
+    public static void returnStock(int id, int quantity){
+
+    }
+
 }
 
