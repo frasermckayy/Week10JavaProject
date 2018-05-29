@@ -49,9 +49,7 @@ public class ShopController {
             Food food = DBHelper.find(id, Food.class);
 
             model.put("items", food);
-
             model.put("user", DBUser.getUser(req, res));
-
             model.put("template", "templates/shop/select.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -66,9 +64,7 @@ public class ShopController {
             Food food = DBHelper.find(id, Food.class);
             food.setId(id);food.setQuantity(food.getQuantity()-quantity);
 
-
             Food newFoodItem = new Food(food.getCategory(), quantity, food.getPrice(), food.getName());
-            // newFoodItem.setQuantity(quantity);
 
             usersBasket.addItem(newFoodItem);newFoodItem.setBasket(usersBasket);
 
@@ -79,7 +75,7 @@ public class ShopController {
         }, new VelocityTemplateEngine());
 
         // CLOTHES SECTION
-        get("/shop/clothes", (req, res) -> {
+        get("/shop/clothe", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Clothe> clothes = DBStock.getClotheStock();
             model.put("user", DBUser.getUser(req, res));
@@ -88,8 +84,7 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        // ROUTE NOT WORKING
-        get("/shop/clothes/:id", (req, res) -> {
+        get("/shop/clothe/:id", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             int id = Integer.parseInt(req.params(":id"));
             Clothe clothe = DBHelper.find(id, Clothe.class);
@@ -100,7 +95,7 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/shop/clothes/:id/add", (req, res) -> {
+        post("/shop/clothe/:id/add", (req, res) -> {
             User currentUser = DBUser.getUser(req, res);
             Basket usersBasket = currentUser.getBasket();
 
@@ -110,15 +105,13 @@ public class ShopController {
             Clothe clothe = DBHelper.find(id, Clothe.class);
             clothe.setId(id);clothe.setQuantity(clothe.getQuantity()-quantity);
 
-
-            Clothe newClotheItem = clothe;
-            newClotheItem.setQuantity(quantity);
+            Clothe newClotheItem = new Clothe(clothe.getCategory(), quantity, clothe.getPrice(), clothe.getColor(), clothe.getSize());
 
             usersBasket.addItem(newClotheItem);newClotheItem.setBasket(usersBasket);
 
             DBHelper.update(usersBasket);DBHelper.update(clothe);DBHelper.save(newClotheItem);
 
-            res.redirect("/shop/clothes");
+            res.redirect("/shop/clothe");
             return null;
         }, new VelocityTemplateEngine());
 
@@ -153,8 +146,7 @@ public class ShopController {
             Electronic electronic = DBHelper.find(id, Electronic.class);
             electronic.setId(id);electronic.setQuantity(electronic.getQuantity()-quantity);
 
-
-            Electronic newElectronicItem = electronic;
+            Electronic newElectronicItem = new Electronic(electronic.getCategory(), quantity, electronic.getPrice(), electronic.getParts());
             newElectronicItem.setQuantity(quantity);
 
             usersBasket.addItem(newElectronicItem);newElectronicItem.setBasket(usersBasket);
@@ -164,6 +156,9 @@ public class ShopController {
             res.redirect("/shop/electronic");
             return null;
         }, new VelocityTemplateEngine());
+
+
+
 
         // SEARCH ROUTES - UNFINISHED
         get("/shop/search", (req, res) -> {
