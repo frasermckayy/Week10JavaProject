@@ -15,7 +15,7 @@
             <td>$item.getCategory()</td>
             <td>$item.getQuantity()</td>
             <td>$item.getPrice()</td>
-            <td><a href="/stock/$item.getId()" class ="button center">Edit</a></td>
+            <td><a href="/stock/$item.getId()/edit" class ="button center">Edit</a></td>
             <td> <form action="/stock/$item.getId()/delete" method="post">
                  <input type="submit" value="Delete" class="button center">
             </form></td>
@@ -23,6 +23,26 @@
             #end
 
     </table>
+
+     <table>
+         <tr>
+          <th>Name</th>
+          <th>Username</th>
+          <th>Basket</th>
+          <th>Loyalty Card</th>
+         </tr>
+
+        #foreach($user in $stock)
+        <tr>
+         <td>$user.getName()</td>
+         <td>$user.getUsername()</td>
+         <td>$user.getBasket()</td>
+         <td>$user.getLoyaltyCard()</td>
+    </tr>
+        #end
+    </table>
+
+
 
 
     <a href="/shop" class="button center">Back to Shopping</a>

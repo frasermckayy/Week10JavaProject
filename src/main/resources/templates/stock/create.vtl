@@ -1,23 +1,27 @@
 <p class="pageHeader">New Item</p>
 
-<form action="/stock" method="post">
+<form action="/stock/new" method="post">
+
     <label for="category">Category:</label>
-    <select name="category" id="category">
-        #foreach( $category in $category )
-        <option value="$category.getId()"></option>
+    <select  name="category" id="category">
+        #foreach($category in $categories)
+        <option value="$category">$category</option>
+
         #end
     </select>
 
     <label for="quantity">Quantity:</label>
-    <select name="quantity" id="quantity"></select>
-
+    <input type="number" name="quantity" id="quantity" required="true">
 
     <label for="price">Price(£):</label>
-    <select name="price" id="price"></select>
+    <input type="number" name="quantity" id="price" required="true">
+
 
 
     <input type="submit" value="Save" class="button">
-    </select>
+
+
+
  </form>
 <a href="/stock" class="button center">Cancel</a>
 
