@@ -49,4 +49,19 @@ public class DBTransaction {
         return usersTransactions;
     }
 
+    public static List<Item> findItemsInTransaction(int id) {
+        session = HibernateUtil.getSessionFactory().openSession();
+        List<Item> itemsInTransaction = null;
+        try {
+            Criteria cr = session.createCriteria(Item.class);
+            cr.createAlias("transactions", "transaction");
+            cr.add(Restrictions.eq("transaction.id", id));
+            itemsInTransaction = cr.list();
+        } catch (HibernateException e) {
+            e.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return itemsInTransaction;
+    }
 }
