@@ -40,7 +40,6 @@ public class StockController {
         }, new VelocityTemplateEngine());
 
         get ("/stock/new", (req, res) -> {
-
             Map<String, Object> model = new HashMap<>();
             HashMap<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
