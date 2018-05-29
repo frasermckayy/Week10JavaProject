@@ -35,13 +35,7 @@ public class AppController {
 
         get("/", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-
-            // Condensing the code to get the users name into one line.
-            // model.put("user", LoginController.getLoggedInUsername(req, res));
-
-            User user2 = DBUser.getUser(req, res);
             model.put("user", DBUser.getUser(req, res));
-
             model.put("template", "templates/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());

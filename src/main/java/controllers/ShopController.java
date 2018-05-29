@@ -30,6 +30,7 @@ public class ShopController {
         get("/shop", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             model.put("user", DBUser.getUser(req, res));
+            model.put("basket", DBUser.getUser(req, res).getBasket());
             model.put("template", "templates/shop/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -63,15 +64,18 @@ public class ShopController {
             Basket usersBasket = currentUser.getBasket();
 
             int id = Integer.parseInt(req.params(":id"));
-            Food food = DBHelper.find(id, Food.class);
             int quantity = Integer.parseInt(req.queryParams("quantity"));
-            food.setQuantity(food.getId()-quantity);
 
-            usersBasket.addItem(food);
-            usersBasket.calculateTotal();
-            DBHelper.save(usersBasket);
+            Food food = DBHelper.find(id, Food.class);
+            food.setId(id);food.setQuantity(quantity);
 
-            Basket usersBasket2 = currentUser.getBasket();
+
+            Food newFoodItem = food;
+            newFoodItem.setQuantity(quantity);
+
+            usersBasket.addItem(newFoodItem);newFoodItem.setBasket(usersBasket);
+
+            DBHelper.update(usersBasket);DBHelper.update(food);DBHelper.save(newFoodItem);
 
             res.redirect("/shop/food");
             return null;
@@ -87,7 +91,7 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        // NOT WORKING
+        // ROUTE NOT WORKING
         get("/shop/clothes/:id", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             int id = Integer.parseInt(req.params(":id"));
@@ -99,24 +103,8 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/shop/clothes/:id/add", (req, res) -> {
-            User currentUser = DBUser.getUser(req, res);
-            Basket usersBasket = currentUser.getBasket();
-
-            int id = Integer.parseInt(req.params(":id"));
-            Clothe clothe = DBHelper.find(id, Clothe.class);
-            int quantity = Integer.parseInt(req.queryParams("quantity"));
-            clothe.setQuantity(clothe.getId()-quantity);
-
-            usersBasket.addItem(clothe);
-            usersBasket.calculateTotal();
-            DBHelper.save(usersBasket);
-
-            Basket usersBasket2 = currentUser.getBasket();
-
-            res.redirect("/shop/food");
-            return null;
-        }, new VelocityTemplateEngine());
+//        post("/shop/clothes/:id/add", (req, res) -> {
+//        }, new VelocityTemplateEngine());
 
         // ELECTRONIC SECTION
         get("/shop/electronic", (req, res) -> {
@@ -139,24 +127,8 @@ public class ShopController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/shop/electronic/:id/add", (req, res) -> {
-            User currentUser = DBUser.getUser(req, res);
-            Basket usersBasket = currentUser.getBasket();
-
-            int id = Integer.parseInt(req.params(":id"));
-            Electronic electronic = DBHelper.find(id, Electronic.class);
-            int quantity = Integer.parseInt(req.queryParams("quantity"));
-            electronic.setQuantity(electronic.getId()-quantity);
-
-            usersBasket.addItem(electronic);
-            usersBasket.calculateTotal();
-            DBHelper.save(usersBasket);
-
-            Basket usersBasket2 = currentUser.getBasket();
-
-            res.redirect("/shop/food");
-            return null;
-        }, new VelocityTemplateEngine());
+//        post("/shop/electronic/:id/add", (req, res) -> {
+//        }, new VelocityTemplateEngine());
 
         // SEARCH ROUTES - UNFINISHED
         get("/shop/search", (req, res) -> {

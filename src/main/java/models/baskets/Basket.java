@@ -1,5 +1,6 @@
 package models.baskets;
 
+import db.DBHelper;
 import models.items.Item;
 import models.users.User;
 
@@ -65,6 +66,7 @@ public class Basket {
 
     public void addItem(Item new_item){
         this.items.add(new_item);
+        calculateTotal();
     }
 
     public void removeitem(Item removedItem){
@@ -79,15 +81,13 @@ public class Basket {
         return this.items.size();
     }
 
-    public double calculateTotal(){
-        double sum = 0;
+    public void calculateTotal(){
         for (Item item : this.items){
-            sum += (item.getPrice() * item.getQuantity());
+            this.total += (item.getPrice() * item.getQuantity());
         }
-        return sum;
     }
 
-    public double buyOneGetOneFree(){
+    public void buyOneGetOneFree(){
         double sum = 0;
         for (Item item : this.items){
             if (item.getQuantity() > 5) {
@@ -98,23 +98,19 @@ public class Basket {
                 }
             }
         }
-        return sum;
+        this.total -= sum;
     }
 
-    public double tenPercentOffPurchasesOver100(){
-        double sum = 0;
-        if (calculateTotal() > 100) {
-            sum = calculateTotal() * 0.9;
+    public void tenPercentOffPurchasesOver100(){
+        if (this.total >= 100) {
+            this.total *= 0.9;
         }
-        return sum;
     }
 
-    public double loyaltyDiscount(User customer){
-        double sum = 0;
+    public void loyaltyDiscount(User customer){
         if (customer.isSignedUpForLoyaltyScheme()){
-            sum = calculateTotal() * 0.9;
+            this.total *= 0.9;
         }
-        return sum;
     }
 
 }
