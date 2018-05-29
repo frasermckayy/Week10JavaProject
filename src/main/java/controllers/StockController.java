@@ -1,6 +1,7 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBUser;
 import db.Seeds;
 import models.items.Category;
 import models.items.Item;
@@ -27,6 +28,7 @@ public class StockController {
             List<Item> items =  DBHelper.getAll(Item.class);
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", items);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -35,6 +37,7 @@ public class StockController {
             Map<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
             model.put("items", items);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/create.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -44,6 +47,7 @@ public class StockController {
             Item item = DBHelper.find(id, Item.class);
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", item);
+            model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
