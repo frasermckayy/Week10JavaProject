@@ -1,0 +1,59 @@
+<p>Please enter the specifics of the new item you want to add to stock: </p>
+
+#if ( $category == "food" )
+<form action="/stock/new/food" method="post">
+
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity" required="true" id="quantity">
+
+    <label for="price">Price</label>
+    <input type="number" name="price" required="true" id="price">
+
+    <label for="name">Name</label>
+    <input type="text" name="name" required="true" id="name">
+
+    <button type="submit">Submit</button>
+
+</form>
+#end
+
+#if ( $category == "clothe" )
+<form action="/stock/new/clothe" method="post">
+
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity" required="true" id="quantity">
+
+    <label for="price">Price</label>
+    <input type="number" name="price" required="true" id="price">
+
+    <label for="color">Colour</label>
+    <input type="text" name="color" required="true" id="color">
+
+    <label for="size">Size</label>
+    <select name="size" id="size">
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+    </select>
+
+    <button type="submit">Submit</button>
+
+</form>
+#end
+
+#if ( $category == "electronic" )
+<form action="/stock/new/electronic" method="post">
+
+    <label for="quantity">Quantity</label>
+    <input type="number" name="quantity" required="true" id="quantity">
+
+    <label for="price">Price</label>
+    <input type="number" name="price" required="true" id="price">
+
+    <label for="parts">Parts</label>
+    <input type="text" name="parts" required="true" id="parts">
+
+    <button type="submit">Submit</button>
+
+</form>
+#end
