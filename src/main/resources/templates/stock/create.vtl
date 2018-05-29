@@ -1,7 +1,8 @@
 <p class="pageHeader">New Item</p>
 
-<form action="/stock" method="post">
+<form action="/stock/new" method="post">
     <label for="category">Category:</label>
+<<<<<<< Updated upstream
 
     <select>
         #foreach( $category in $category )
@@ -11,6 +12,11 @@
         <option value="$category.getId()"></option>
         #end
     </select>
+=======
+    <select name="" id=""></select>
+    <select>
+
+>>>>>>> Stashed changes
 
     <label for="quantity">Quantity:</label>
     <select name="quantity" id="quantity"></select>
@@ -24,6 +30,3 @@
     </select>
  </form>
 <a href="/stock" class="button center">Cancel</a>
-
-
-
