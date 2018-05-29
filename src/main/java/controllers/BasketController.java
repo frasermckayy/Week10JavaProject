@@ -4,6 +4,7 @@ package controllers;
 import db.DBHelper;
 import db.DBItem;
 import db.DBUser;
+import models.baskets.Basket;
 import models.items.Clothe;
 import models.items.Electronic;
 import models.items.Food;
@@ -76,6 +77,9 @@ public class BasketController {
         post("/basket/delete/:id", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));
             DBItem.deleteItem(id);
+            Basket userBasket = DBUser.getUser(req, res).getBasket();
+            userBasket.calculateTotal();
+            DBHelper.save(userBasket);
             res.redirect("/basket");
             return null;
         });

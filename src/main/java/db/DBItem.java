@@ -17,9 +17,8 @@ public class DBItem {
 
     public static void deleteItem(int id){
         Item item = DBHelper.find(id, Item.class);
-        int quantityToReturn = item.getQuantity();
         DBHelper.delete(item);
-        DBStock.returnStock(item, quantityToReturn);
+        DBStock.returnStock(item);
     }
 
 }
