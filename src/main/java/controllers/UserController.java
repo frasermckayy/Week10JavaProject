@@ -26,7 +26,7 @@ public class UserController {
         get("/user", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<User> users = DBHelper.getAll(User.class);
-            model.put("template", "templates/users/index.vtl");
+            model.put("template", "templates/user/index.vtl");
             model.put("users", users);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -34,7 +34,7 @@ public class UserController {
         get("/user/transaction-history", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Transaction> transactions = DBHelper.getAll(Transaction.class);
-            model.put("template", "templates/users/");
+            model.put("template", "templates/user/index.vtl");
             model.put("users", transactions);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -46,7 +46,7 @@ public class UserController {
             User user = DBHelper.find(intId, User.class);
             List<Transaction> transactions = DBHelper.getAll(Transaction.class);
             model.put("transactions", transactions);
-            model.put("template", "templates/users/edit.vtl");
+            model.put("template", "templates/user/edit.vtl");
             model.put("user", user);
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());

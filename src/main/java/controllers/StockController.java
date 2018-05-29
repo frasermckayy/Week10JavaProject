@@ -61,6 +61,7 @@ public class StockController {
             model.put("user", user);
             model.put("stock", item);
             model.put("user", DBUser.getUser(req, res));
+            model.put("categories", Category.values());
             model.put("template", "templates/stock/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
@@ -89,6 +90,22 @@ public class StockController {
             return null;
         });
 
+        post ("/stock/:id/edit", (req, res) -> {
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+            Item item = DBHelper.find(intId, Item.class);
+            Category category = Category.valueOf(req.queryParams("category"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+
+            item.setCategory(category);
+            item.setQuantity(quantity);
+            item.setPrice(price);
+            DBHelper.update(item);
+            res.redirect("/stock");
+            return null;
+
+        }, new VelocityTemplateEngine());
 
         post("/stock/:id/delete", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));

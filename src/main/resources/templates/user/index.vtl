@@ -1,0 +1,23 @@
+<p class="pageHeader">Users</p>
+
+<h1>User</h1>
+
+<div class="container">
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Basket</th>
+        <th>Loyalty Card</th>
+    </tr>
+
+    #foreach($user in $users)
+    <tr>
+        <td>$user.getName()</td>
+        <td>$user.getUsername()</td>
+        <td>$user.getBasket()</td>
+        <td>$user.getLoyaltyCard()</td>
+    </tr>
+    #end
+</table>
+</div>
