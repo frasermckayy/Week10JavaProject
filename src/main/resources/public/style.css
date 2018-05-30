@@ -10,7 +10,23 @@ ul {
 
 li {
   float: left;
+   display: inline-block;
+      vertical-align: middle;
+      transform: translateZ(0);
+      box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+      backface-visibility: hidden;
+      -moz-osx-font-smoothing: grayscale;
+      transition-duration: 0.3s;
+      transition-property: transform;
+
 }
+
+li:hover,
+li:focus,
+li:active {
+    transform: scale(1.1);
+}
+
 
 li a {
   display: block;
@@ -27,19 +43,25 @@ table, td, td {
 }
 
 .container {
-  justify-content: center;
+  background-color: white;
+  border: 6px solid grey;
   padding: 20px;
+  justify-content: center;
   text-align: center;
+  width: 800px;
+
 }
 
 
 body {
-background-color: lightblue;
-
+background-color: lightgrey;
 }
 
 
 .div1 {
+    border-style: solid;
+    border-width: 2px;
+    border
     display: inline-block;
     vertical-align: middle;
     transform: translateZ(0);
@@ -54,8 +76,23 @@ background-color: lightblue;
 .div1:focus,
 .div1:active {
     transform: scale(1.1);
+}
 
- .logout {
-    text: center;
+
+ div.logout {
+       display: inline-block;
+     vertical-align: middle;
+     transform: translateZ(0);
+     box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+     backface-visibility: hidden;
+     -moz-osx-font-smoothing: grayscale;
+     transition-duration: 0.3s;
+     transition-property: transform;
  }
+div.logout:hover,
+div.logout:focus,
+div.logout:active {
+    transform: scale(1.1);
+    }
+
 
