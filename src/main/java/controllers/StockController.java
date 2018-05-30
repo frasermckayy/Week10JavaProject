@@ -31,6 +31,10 @@ public class StockController {
         get("/stock/:id", (req, res) -> {
             int id = Integer.parseInt(req.params("id"));
             Item item = DBHelper.find(id, Item.class);
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
             HashMap<String, Object> model = new HashMap<>();
             model.put("stock", item);
             model.put("template", "templates/stocks/show.vtl");
@@ -43,6 +47,7 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+<<<<<<< Updated upstream
         post("/stock/:id/edit", (req, res) -> {
             int id = Integer.parseInt(req.queryParams("id"));
             String category = req.queryParams("food");
@@ -65,6 +70,28 @@ public class StockController {
                 String parts = req.queryParams("parts");
                 DBHelper.save("parts");
             }
+=======
+        post("/stock", (req, res) -> {
+            String item = req.queryParams("item");
+            res.redirect("/stock");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
+        post ("/stock/:id/edit", (req, res) -> {
+            Integer intId = Integer.parseInt(req.params(":id"));
+            Item item = DBHelper.find(intId, Item.class);
+            Category category = Category.valueOf(req.queryParams("category"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            double price = Double.parseDouble(req.queryParams("price"));
+            item.setCategory(category);
+            item.setQuantity(quantity);
+            item.setPrice(price);
+            DBHelper.update(item);
+            res.redirect("/stock");
+            return null;
+        }, new VelocityTemplateEngine());
+>>>>>>> Stashed changes
 
             res.redirect("/stock");
             return null;
