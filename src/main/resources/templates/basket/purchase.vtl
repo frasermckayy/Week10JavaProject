@@ -1,0 +1,39 @@
+<h1>Transaction Details: </h1>
+
+<table>
+
+    <tr>
+        <th>Discounts Applied:</th>
+        <th>BoGoF</th>
+        <th>Ten Percent Off Purchases over £100</th>
+        <th>Loyalty Discount</th>
+    </tr>
+
+    <tr>
+        <th>   </th>
+        #if ( $user.getBasket().isBogof() )
+            <th> $user.getBasket().isBogof() </th>
+        #else
+            <th> false </th>
+        #end
+        #if ( $user.getBasket().isOver100() )
+            <th> $user.getBasket().isOver100() </th>
+        #else
+            <th> false </th>
+        #end
+        #if ( $user.getBasket().isLoyaltyDiscount() )
+            <th> $user.isLoyaltyDiscount() </th>
+        #else
+            <th> false </th>
+        #end
+    </tr>
+
+</table>
+
+<p>Your total cost for this transaction will be: $user.getBasket().getTotal() </p>
+
+<p>Are you sure you want to make this order: </p>
+
+<form action="/basket/confirm" method="post">
+    <button type="submit">Order</button>
+</form>

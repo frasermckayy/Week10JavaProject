@@ -16,18 +16,29 @@ public class Seeds {
         DBHelper.deleteAll(Clothe.class);
         DBHelper.deleteAll(Electronic.class);
         DBHelper.deleteAll(User.class);
+        DBHelper.deleteAll(Item.class);
+        DBHelper.deleteAll(LoyaltyCard.class);
+
+        // Admin account
+
+        LoyaltyCard adminLoyaltyCard = new LoyaltyCard("31/05/2018");
+        User testAdmin = new User(adminLoyaltyCard, true, "Admin", "Admin", "admin123");
+
+        DBHelper.save(adminLoyaltyCard);DBHelper.save(testAdmin);
 
         // Users
 
         LoyaltyCard testLoyaltyCard = new LoyaltyCard("n/a");
-        User testUser = new User(testLoyaltyCard, false, "Andrew", "Fraz123", "Pass123");
+        User testUser = new User(testLoyaltyCard, false, "Fraser", "Fraz123", "Pass123");
 
         DBHelper.save(testLoyaltyCard);DBHelper.save(testUser);
 
         // Basket
 
-        Basket newBasket = new Basket(testUser);
+        Basket adminBasket = new Basket(testAdmin);
+        DBHelper.save(adminBasket);
 
+        Basket newBasket = new Basket(testUser);
         DBHelper.save(newBasket);
 
         // Food Items

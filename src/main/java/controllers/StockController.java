@@ -1,10 +1,10 @@
 package controllers;
 
 import db.DBHelper;
+import db.DBStock;
 import db.DBUser;
 import db.Seeds;
-import models.items.Category;
-import models.items.Item;
+import models.items.*;
 import models.users.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
@@ -27,7 +27,7 @@ public class StockController {
 
         get("/stock", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-            List<Item> items =  DBHelper.getAll(Item.class);
+            List<Item> items = DBStock.getAllStock();
             List<User> user = DBHelper.getAll(User.class);
             model.put("stock", items);
             model.put("user", DBUser.getUser(req, res));
@@ -35,17 +35,21 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-
         get ("/stock/new", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
             List<Item> items = DBHelper.getAll(Item.class);
-
             model.put("items", items);
             model.put("user", DBUser.getUser(req, res));
             model.put("template", "templates/stock/create.vtl");
             model.put("categories", Category.values());
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
+
+        post("/stock/new/item", (req, res) -> {
+            String category = req.queryParams("category");
+            res.redirect("/stock/new/" + category.toLowerCase());
+            return null;
+        });
 
         get("/stock/:id", (req, res) -> {
              HashMap<String, Object> model = new HashMap<>();
@@ -61,17 +65,58 @@ public class StockController {
             model.put("user", user);
             model.put("stock", item);
             model.put("user", DBUser.getUser(req, res));
+            model.put("categories", Category.values());
             model.put("template", "templates/stock/show.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
         get("/stock/new/food", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-
-
+            model.put("user", DBUser.getUser(req, res));
+            model.put("category", "food");
+            model.put("template", "templates/stock/create-item.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        get("/stock/new/clothe", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("category", "clothe");
+            model.put("template", "templates/stock/create-item.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        get("/stock/new/electronic", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("user", DBUser.getUser(req, res));
+            model.put("category", "electronic");
+            model.put("template", "templates/stock/create-item.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/stock/:id/edit", (req, res) -> {
+                    int id = Integer.parseInt(req.queryParams("id"));
+                    String category = req.queryParams("food");
+                    String category1 = req.queryParams("clothe");
+                    String category2 = req.queryParams("electronic");
+                    int quantity = Integer.parseInt(req.queryParams("quantity"));
+                    double price = Double.parseDouble(req.queryParams("price"));
+
+                    if (category == "FOOD") {
+                        String name = req.queryParams("name");
+                        DBHelper.save("food");
+                    } else if (category1 == "CLOTHE") {
+                        String size = req.queryParams("size");
+                        DBHelper.save("size");
+                        String color = req.queryParams("color");
+                        DBHelper.save("color");
+                    } else if (category2 == "ELECTRONIC") {
+                        String parts = req.queryParams("parts");
+                        DBHelper.save("parts");
+                    }
+
+                    return null;
+                });
 
         post("/stock", (req, res) -> {
             String item = req.queryParams("item");
@@ -79,16 +124,69 @@ public class StockController {
             return null;
         }, new VelocityTemplateEngine());
 
-        post("/stock/new/food", (req, res) -> {
-            String category = req.queryParams("category");
-            int quantity = Integer.parseInt(req.queryParams("quantity"));
-            int price = Integer.parseInt(req.params("price"));
-            String name = req.queryParams("name");
 
+        post ("/stock/:id/edit", (req, res) -> {
+                    Integer intId = Integer.parseInt(req.params(":id"));
+                    Item item = DBHelper.find(intId, Item.class);
+                    Category category = Category.valueOf(req.queryParams("category"));
+                    int quantity = Integer.parseInt(req.queryParams("quantity"));
+                    double price = Double.parseDouble(req.queryParams("price"));
+                    return null;
+                }, new VelocityTemplateEngine());
+
+        post("/stock", (req, res) -> {
+            String item = req.queryParams("item");
+            res.redirect("/stock");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
+        post ("/stock/:id/edit", (req, res) -> {
+            String strId = req.params(":id");
+            Integer intId = Integer.parseInt(strId);
+            Item item = DBHelper.find(intId, Item.class);
+            Category category = Category.valueOf(req.queryParams("category"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+
+            item.setCategory(category);
+            item.setQuantity(quantity);
+            item.setPrice(price);
+            DBHelper.update(item);
+            res.redirect("/stock");
+            return null;
+        }, new VelocityTemplateEngine());
+
+        post("/stock/new/food", (req, res) ->{
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            String name = req.queryParams("name");
+            Food newFoodItem = new Food(Category.FOOD, quantity, price, name);
+            DBHelper.save(newFoodItem);
             res.redirect("/stock");
             return null;
         });
 
+        post("/stock/new/clothe", (req, res) -> {
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            String color = req.queryParams("color");
+            Character size = req.queryParams("size").charAt(0);
+            Clothe newClotheItem = new Clothe(Category.CLOTHE, quantity, price, color, size);
+            DBHelper.save(newClotheItem);
+            res.redirect("/stock");
+            return null;
+        });
+
+        post("/stock/new/electronic", (req, res) -> {
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            int price = Integer.parseInt(req.queryParams("price"));
+            String parts = req.queryParams("parts");
+            Electronic newElectronicItem = new Electronic(Category.ELECTRONIC, quantity, price, parts);
+            DBHelper.save(newElectronicItem);
+            res.redirect("/stock");
+            return null;
+        });
 
         post("/stock/:id/delete", (req, res) -> {
             int id = Integer.parseInt(req.params(":id"));

@@ -79,7 +79,7 @@ public abstract class Item {
         this.price = price;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "transactions_items",
     joinColumns = {@JoinColumn(name = "item_id", nullable = false, updatable = false)},
     inverseJoinColumns = {@JoinColumn(name = "transaction_id", nullable = false, updatable = false)})

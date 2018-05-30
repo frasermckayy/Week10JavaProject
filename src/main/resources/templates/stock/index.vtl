@@ -1,5 +1,3 @@
-<p class="pageHeader">Stock</p>
-
 <h1>Stock</h1>
 
 <div class="container">
@@ -24,28 +22,6 @@
 
     </table>
 
-     <table>
-         <tr>
-          <th>Name</th>
-          <th>Username</th>
-          <th>Basket</th>
-          <th>Loyalty Card</th>
-         </tr>
-
-        #foreach($user in $stock)
-        <tr>
-         <td>$user.getName()</td>
-         <td>$user.getUsername()</td>
-         <td>$user.getBasket()</td>
-         <td>$user.getLoyaltyCard()</td>
-    </tr>
-        #end
-    </table>
-
-
-
-
     <a href="/shop" class="button center">Back to Shopping</a>
-
 
 </div>
