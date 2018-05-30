@@ -94,6 +94,42 @@ public class StockController {
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
+        post("/stock/:id/edit", (req, res) -> {
+            int id = Integer.parseInt(req.queryParams("id"));
+            String category = req.queryParams("food");
+            String category1 = req.queryParams("clothe");
+            String category2 = req.queryParams("electronic");
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            double price = Double.parseDouble(req.queryParams("price"));
+
+            if (category == "FOOD") {
+                String name = req.queryParams("name");
+                DBHelper.save("food");
+            }
+            else if (category1 == "CLOTHE") {
+                    String size = req.queryParams("size");
+                    DBHelper.save("size");
+                    String color = req.queryParams("color");
+                    DBHelper.save("color");
+                }
+            else if (category2 == "ELECTRONIC") {
+                String parts = req.queryParams("parts");
+                DBHelper.save("parts");
+            }
+        post("/stock", (req, res) -> {
+            String item = req.queryParams("item");
+            res.redirect("/stock");
+            return null;
+        }, new VelocityTemplateEngine());
+
+
+        post ("/stock/:id/edit", (req, res) -> {
+            Integer intId = Integer.parseInt(req.params(":id"));
+            Item item = DBHelper.find(intId, Item.class);
+            Category category = Category.valueOf(req.queryParams("category"));
+            int quantity = Integer.parseInt(req.queryParams("quantity"));
+            double price = Double.parseDouble(req.queryParams("price"));
+
         post("/stock", (req, res) -> {
             String item = req.queryParams("item");
             res.redirect("/stock");
@@ -108,6 +144,7 @@ public class StockController {
             Category category = Category.valueOf(req.queryParams("category"));
             int quantity = Integer.parseInt(req.queryParams("quantity"));
             int price = Integer.parseInt(req.queryParams("price"));
+
             item.setCategory(category);
             item.setQuantity(quantity);
             item.setPrice(price);
@@ -115,7 +152,6 @@ public class StockController {
             res.redirect("/stock");
             return null;
         }, new VelocityTemplateEngine());
-
 
         post("/stock/new/food", (req, res) ->{
             int quantity = Integer.parseInt(req.queryParams("quantity"));
