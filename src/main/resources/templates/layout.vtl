@@ -4,7 +4,7 @@
         <title>Online Shop</title>
             <link href="/style.css" rel="stylesheet" type="text/css" />
     </head>
-
+    <div class="div1">
     <ul class="flex-container space-between">
         <li><a href="/">Home</a></li>
         <li><a href="/shop">Shop</a></li>
@@ -12,12 +12,14 @@
         <li><a href="/stock">Stock Control Panel</a></li>
         <li><a href="/user">User Panel</a></li>
     </ul>
-
+    </div>
     <body>
 
             <p>Welcome $user.getName() <a href="/logout">Logout</a> </p>
             <p>Your total in basket: £ $user.getBasket().getTotal() </p>
-
+            
+    <div class="logout"><p>Welcome $user.getName() <a href="/logout">logout</a></p></div>
+        <p>Your total in basket: £ $user.getBasket().getTotal() </p>
         <!-- begin inner template-->
         <div class="container">
             #parse( $template )
