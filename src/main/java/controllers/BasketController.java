@@ -72,7 +72,7 @@ public class BasketController {
 
         post("/basket/confirm", (req, res) -> {
             DBTransaction.createTransaction(req, res);
-
+            DBBasket.clearBasket(DBUser.getUser(req, res));
             res.redirect("/basket/confirm");
             return null;
         });
@@ -101,6 +101,6 @@ public class BasketController {
             return null;
         });
 
-
     }
+
 }
