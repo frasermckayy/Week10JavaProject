@@ -14,9 +14,10 @@
     </ul>
 
     <body>
-    
-        <p>Welcome $user.getName() <a href="/logout">Logout</a> </p>
-        <p>Your total in basket: £ $user.getBasket().getTotal() </p>
+
+            <p>Welcome $user.getName() <a href="/logout">Logout</a> </p>
+            <p>Your total in basket: £ $user.getBasket().getTotal() </p>
+
         <!-- begin inner template-->
         <div class="container">
             #parse( $template )

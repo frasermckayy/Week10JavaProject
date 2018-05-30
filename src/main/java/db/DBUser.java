@@ -17,6 +17,9 @@ public class DBUser {
     public static User getUser(Request req, Response res){
         String username = LoginController.getLoggedInUsername(req, res);
         User foundUser = findUser(username);
+        if (foundUser == null) {
+            res.redirect("/sign-up");
+        }
         return foundUser;
     }
 
