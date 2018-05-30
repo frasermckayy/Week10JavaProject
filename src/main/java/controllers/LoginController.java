@@ -1,5 +1,9 @@
 package controllers;
 
+import db.DBHelper;
+import models.baskets.Basket;
+import models.users.LoyaltyCard;
+import models.users.User;
 import spark.ModelAndView;
 import spark.Request;
 import spark.Response;
@@ -36,6 +40,29 @@ public class LoginController {
             res.redirect("/");
             return null;
         }, new VelocityTemplateEngine());
+
+        get("/sign-up", (req, res) -> {
+            HashMap<String, Object> model = new HashMap<>();
+            model.put("template", "templates/login/signup.vtl");
+            return new ModelAndView(model, "templates/layout.vtl");
+        }, new VelocityTemplateEngine());
+
+        post("/sign-up/new", (req, res) -> {
+            LoyaltyCard newLoyaltyCard = new LoyaltyCard("N/A");
+            String name = req.queryParams("name");
+            String username = req.queryParams("username");
+            String password = req.queryParams("password");
+            Boolean loyaltyScheme = false;
+            if (req.queryParams("loyaltyscheme").equals("true")) { loyaltyScheme = true; }
+
+            User newUser = new User(newLoyaltyCard, loyaltyScheme, name, username, password);
+            Basket newBasket = new Basket(newUser);
+
+            DBHelper.save(newLoyaltyCard);DBHelper.save(newUser);DBHelper.save(newBasket);
+
+            res.redirect("/");
+            return null;
+        });
 
     }
 

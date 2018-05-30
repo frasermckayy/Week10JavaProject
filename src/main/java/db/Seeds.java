@@ -20,7 +20,7 @@ public class Seeds {
         // Users
 
         LoyaltyCard testLoyaltyCard = new LoyaltyCard("n/a");
-        User testUser = new User(testLoyaltyCard, false, "Andrew", "Fraz123", "Pass123");
+        User testUser = new User(testLoyaltyCard, false, "Fraser", "Fraz123", "Pass123");
 
         DBHelper.save(testLoyaltyCard);DBHelper.save(testUser);
 
