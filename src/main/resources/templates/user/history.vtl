@@ -1,0 +1,22 @@
+<h1>Your transaction history</h1>
+
+<table>
+
+    <tr>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+
+    #foreach ( $transaction in $transactions )
+    <tr>
+        <th> $transaction.getAmount() </th>
+        <th> $transaction.getDate() </th>
+        <th>
+        <form action="/user/transaction-history/$transaction.getId()" method="get">
+            <button type="submit">View more information</button>
+        </form>
+        </th>
+    </tr>
+    #end
+
+</table>

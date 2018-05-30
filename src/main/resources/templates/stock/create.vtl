@@ -1,0 +1,18 @@
+<p class="pageHeader">Add new stock item</p>
+
+<p>Please select the category of the new item you are adding to stock supply: </p>
+
+<form action="/stock/new/item" method="post">
+
+    <label for="category">Category:</label>
+    <select name="category" id="category">
+        #foreach($category in $categories)
+        <option value="$category">$category</option>
+        #end
+    </select>
+
+    <input type="submit" value="Submit" class="button">
+
+ </form>
+<a href="/stock" class="button center">Cancel</a>
+

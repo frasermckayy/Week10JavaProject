@@ -67,7 +67,7 @@ public class Transaction {
         this.date = date;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "transactions_items",
     joinColumns = {@JoinColumn(name = "transaction_id", nullable = false, updatable = false)},
     inverseJoinColumns = {@JoinColumn(name = "item_id", nullable = false, updatable = false)})
@@ -90,6 +90,7 @@ public class Transaction {
     }
 
     public void updateAmount(Basket testBasket) {
-        setAmount(testBasket.calculateTotal());
+        testBasket.calculateTotal();
+        setAmount(testBasket.getTotal());
     }
 }

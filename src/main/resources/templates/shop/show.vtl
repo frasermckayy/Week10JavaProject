@@ -1,0 +1,38 @@
+<p>Below are a list of all the items in your chose category: </p>
+
+<table>
+
+    <tr>
+        <th>Quantity</th>
+        <th>Price</th>
+        #if ( $items.get(0).getCategory() == "FOOD" )
+        <th>Name</th>
+        #elseif ( $items.get(0).getCategory() == "CLOTHE" )
+        <th>Colour</th>
+        <th>Size</th>
+        #elseif ( $items.get(0).getCategory() == "ELECTRONIC" )
+        <th>Parts</th>
+        #end
+    </tr>
+
+    #foreach ( $item in $items )
+    <tr>
+        <th> $item.getQuantity() </th>
+        <th> $item.getPrice() </th>
+            #if ( $items.get(0).getCategory() == "FOOD" )
+                <th> $item.getName() </th>
+            #elseif ( $items.get(0).getCategory() == "CLOTHE" )
+                <th> $item.getColor() </th>
+                <th> $item.getSize() </th>
+            #elseif ( $items.get(0).getCategory() == "ELECTRONIC" )
+                <th> $item.getParts() </th>
+            #end
+        <th>
+            <form action="/shop/$item.prettyCategory()/$item.getId()" method="get">
+                <button type="submit">More information</button>
+            </form>
+        </th>
+    </tr>
+    #end
+
+</table>

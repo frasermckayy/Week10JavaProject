@@ -1,0 +1,37 @@
+<table>
+
+    <tr>
+        <th>Quantity</th>
+        <th>Price</th>
+        #if ( $items.get(0).getCategory() == "FOOD" )
+        <th>Name</th>
+        #elseif ( $items.get(0).getCategory() == "CLOTHE" )
+        <th>Colour</th>
+        <th>Size</th>
+        #elseif ( $items.get(0).getCategory() == "ELECTRONIC" )
+        <th>Parts</th>
+        #end
+    </tr>
+
+    <tr></tr>
+            <th> $items.getQuantity() </th>
+            <th> $items.getPrice() </th>
+            #if ( $items.get(0).getCategory() == "FOOD" )
+                <th> $items.getName() </th>
+            #elseif ( $items.get(0).getCategory() == "CLOTHE" )
+                 <th> $items.getColor() </th>
+                 <th> $items.getSize() </th>
+            #elseif ( $items.get(0).getCategory() == "ELECTRONIC" )
+                    <th> $items.getParts() </th>
+            #end
+            <form action="/shop/$items.prettyCategory()/$items.getId()/add" method="post">
+                <th>
+                    <input type="number" name="quantity" required="true">
+                </th>
+                <th>
+                    <button type="submit">Add to Basket</button>
+            </th>
+        </form>
+    </tr>
+
+</table>

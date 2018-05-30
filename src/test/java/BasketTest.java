@@ -23,6 +23,7 @@ public class BasketTest {
         testBasket = new Basket(user);
         food1 = new Food(Category.FOOD, 6, 1.50, "Bananas");
         food2 = new Food(Category.FOOD, 6, 1.50, "Apples");
+
         loyaltyCard = new LoyaltyCard("27/05/2018");
         user = new User(loyaltyCard, true, "Andrew", "Fraz123", "Pass123");
         loyaltyCard.setUser(user);user.setSignedUpForLoyaltyScheme(true);
@@ -59,27 +60,36 @@ public class BasketTest {
     public void canCalculateTotal(){
         testBasket.addItem(food1);
         testBasket.addItem(food2);
-        assertEquals(18.0, testBasket.calculateTotal(), 0.01);
+        testBasket.calculateTotal();
+        assertEquals(18.0, testBasket.getTotal(), 0.01);
     }
 
     @Test
     public void canBuyOneGetOneFree(){
         testBasket.addItem(food1);
         testBasket.addItem(food2);
-        assertEquals(9.0, testBasket.buyOneGetOneFree(), 0.01);
+        testBasket.calculateTotal();
+        testBasket.buyOneGetOneFree();
+        double a = testBasket.getTotal();
+        assertEquals(9.0, testBasket.getTotal(), 0.01);
     }
 
     @Test
     public void canGetTenPercentOff(){
-        Electronic laptop = new Electronic(Category.ELECTRONIC, 150, 1, "XF100");
+        Electronic laptop = new Electronic(Category.ELECTRONIC, 1, 150, "XF100");
         testBasket.addItem(laptop);
-        assertEquals(135, testBasket.tenPercentOffPurchasesOver100(), 0.01);
+        testBasket.calculateTotal();
+        testBasket.tenPercentOffPurchasesOver100();
+        assertEquals(135, testBasket.getTotal(), 0.01);
     }
 
     @Test
     public void canGetLoyaltyDiscount(){
-        Electronic laptop = new Electronic(Category.ELECTRONIC, 150, 1, "XF100");
+        Electronic laptop = new Electronic(Category.ELECTRONIC, 1, 150, "XF100");
         testBasket.addItem(laptop);
-        assertEquals(135, testBasket.loyaltyDiscount(user), 0.01);
+        testBasket.calculateTotal();
+        testBasket.setUser(user);
+        testBasket.loyaltyDiscount();
+        assertEquals(135, testBasket.getTotal(), 0.01);
     }
 }

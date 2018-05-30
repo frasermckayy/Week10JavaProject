@@ -1,6 +1,10 @@
 package controllers;
 
 
+import db.DBUser;
+import db.Seeds;
+import models.transactions.Transaction;
+import models.users.User;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 
@@ -8,32 +12,34 @@ import java.util.HashMap;
 
 import static spark.Spark.get;
 import static spark.Spark.post;
+import static spark.SparkBase.staticFileLocation;
+
 import spark.ModelAndView;
 
 import java.util.HashMap;
 
 public class AppController {
 
-    public AppController() {
-        setUpEndPoints();
-    }
+    public static void main(String[] args) {
 
-    private void setUpEndPoints() {
+        Seeds.seedData();
 
-        get("/app", (req, res) -> {
+        staticFileLocation("/public");
+
+        BasketController basketController = new BasketController();
+        LoginController loginController = new LoginController();
+        ShopController shopController = new ShopController();
+        StockController stockController = new StockController();
+        TransactionController transactionController = new TransactionController();
+        UserController userController = new UserController();
+
+        get("/", (req, res) -> {
             HashMap<String, Object> model = new HashMap<>();
-
-            // Fill with data
-
+            model.put("user", DBUser.getUser(req, res));
+            model.put("template", "templates/index.vtl");
             return new ModelAndView(model, "templates/layout.vtl");
         }, new VelocityTemplateEngine());
 
-        post("/app", (req, res) -> {
-
-            // Fill with data
-
-            res.redirect("/app");
-            return null;
-        });
     }
+
 }

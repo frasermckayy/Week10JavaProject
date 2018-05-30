@@ -1,0 +1,17 @@
+<table>
+
+    <tr>
+        <th>Category</th>
+        <th>Quantity</th>
+        <th>Price</th>
+    </tr>
+
+    #foreach ( $item in $items )
+    <tr>
+        <th> $item.getCategory() </th>
+        <th> $item.getQuantity() </th>
+        <th> $item.getPrice() </th>
+    </tr>
+    #end
+
+</table>

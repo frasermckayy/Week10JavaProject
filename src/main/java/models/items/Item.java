@@ -11,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@Table(name = "items")
 public abstract class Item {
 
     private int id;
@@ -78,7 +79,7 @@ public abstract class Item {
         this.price = price;
     }
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinTable(name = "transactions_items",
     joinColumns = {@JoinColumn(name = "item_id", nullable = false, updatable = false)},
     inverseJoinColumns = {@JoinColumn(name = "transaction_id", nullable = false, updatable = false)})
@@ -96,6 +97,10 @@ public abstract class Item {
 
     public void removeTransaction(Transaction removedTransaction){
         this.transactions.remove(removedTransaction);
+    }
+
+    public String prettyCategory(){
+        return getCategory().name().toLowerCase();
     }
 
 }
