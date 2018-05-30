@@ -116,7 +116,7 @@ public class StockController {
                     }
 
                     return null;
-                };
+                });
 
         post("/stock", (req, res) -> {
             String item = req.queryParams("item");
@@ -198,7 +198,5 @@ public class StockController {
 
 
     }
-
-}
 
 }
